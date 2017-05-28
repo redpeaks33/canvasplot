@@ -1,0 +1,12 @@
+﻿.container-fluid{
+    padding:30px;
+}
+.flex-container{
+    display:flex;
+    padding:30px;
+}
+.flex-item{
+    flex-basis:50%;
+    
+    border:1px solid gray; 
+}
