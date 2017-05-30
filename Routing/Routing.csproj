@@ -78,6 +78,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index_dygraph.html" />
     <Content Include="index.html" />
+    <Content Include="js\controller_back.js" />
     <Content Include="scripts\angular-mocks.js" />
     <None Include="scripts\angular.intellisense.js" />
     <Content Include="scripts\angular.js" />

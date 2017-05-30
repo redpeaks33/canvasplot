@@ -1,7 +1,10 @@
 ﻿#canvas_id{
     border:1px solid red;
-    width: 50%;
-    height:50%;
+    
+}
+
+#canvas_id2{
+    border:1px solid blue;
 }
 body{
 

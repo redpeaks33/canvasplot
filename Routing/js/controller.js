@@ -6,7 +6,6 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
 
     $scope.initialize = function()
     {
-        
         $scope.tabClicked('dygraph');
     }
     $scope.tabClicked = function(type)
@@ -18,86 +17,51 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
         createjs.Ticker.setFPS(60);
         createjs.Ticker.timingMode = createjs.Ticker.RAF;
 
-
-
-
-        //createjs.Ticker.addEventListener("tick", handleTick(stage));
-        //stage.update();
-
-
-        //// 円を作成します
-        //$scope.shape = new createjs.Shape();
-        //$scope.shape.graphics.beginFill("DarkRed").drawCircle(0, 0, 100); //半径100pxの円を描画
-        //$scope.shape.y = 150; // Y座標300の位置に配置
-        //stage.addChild($scope.shape); // 表示リストに追加
-
-
-
+    
+        $scope.stage2 = new createjs.Stage('canvas_id2');
+        drawStaticGraph();
     }
 
-    //function handleTick() {
-    //    // アニメーション
-    //    $scope.shape.x += 2;
-    //}
     var initializeData = function () {
-        var limit = 20000;    //increase number of dataPoints by increasing this
-        var y = 0;
+        var limit = 32768;    //increase number of dataPoints by increasing this
         $scope.dataPoints = [];
-        for (var i = 0; i < limit/2; i++) {
+        for (var i = 0; i < limit; i++)
+        {
             $scope.dataPoints.push({
-                x: i,
-                y: i*i/1000 
+                t: 0.002 * i,
+                x: Math.floor((Math.random() * 100) + 1),
+                y: Math.floor((Math.random() * 200) + 1), 
             });
         }
-        for (var i = limit / 2; i < limit; i++) {
-            $scope.dataPoints.push({
-                x: i,
-                y: i * i / 100
-            });
-        }
-
-
-
-        //for(var i = 0;i< $scope.dataPoints.length;i++) {
-        //    var shape = new createjs.Shape();
-        //    shape.graphics.beginFill("Blue");
-        //    shape.graphics.drawCircle($scope.dataPoints[i].x, $scope.dataPoints[i].y, 1);
-        //    stage.addChild(shape);
-        //    if (i != 0)
-        //    {
-        //        var g = new createjs.Graphics();
-        //        g.beginStroke("Red");
-        //        g.moveTo($scope.dataPoints[i - 1].x, $scope.dataPoints[i - 1].y);
-        //        g.lineTo($scope.dataPoints[i].x, $scope.dataPoints[i].y);
-        //        var s = new createjs.Shape(g);
-        //        stage.addChild(s);
-        //    }
-            
-        //};
-
     }
 
-    var index = 0;
-    var handleTick = function() {
-        // アニメーション
-        //shape.x += 2;
+    var drawStaticGraph = function()
+    {
+        var shape = new createjs.Shape();
+        shape.graphics.beginFill("Green");
+        _.each($scope.dataPoints, function (n) {
+            shape.graphics.drawCircle(n.x, n.y, 1);
+            $scope.stage2.addChild(shape);
+        });
+        $scope.stage2.update();
+    }
 
+    $scope.index = 0;
+    var handleTick = function() {
         var shape = new createjs.Shape();
         shape.graphics.beginFill("Blue");
-        shape.graphics.drawCircle($scope.dataPoints[index].x, $scope.dataPoints[index].y, 1);
+        shape.graphics.drawCircle($scope.dataPoints[$scope.index].x, $scope.dataPoints[$scope.index].y, 1);
         $scope.stage.addChild(shape);
-        if (index != 0) {
+        if ($scope.index != 0) {
             var g = new createjs.Graphics();
             g.beginStroke("Red");
-            g.moveTo($scope.dataPoints[index - 1].x, $scope.dataPoints[index - 1].y);
-            g.lineTo($scope.dataPoints[index].x, $scope.dataPoints[index].y);
+            g.moveTo($scope.dataPoints[$scope.index - 1].x, $scope.dataPoints[$scope.index - 1].y);
+            g.lineTo($scope.dataPoints[$scope.index].x, $scope.dataPoints[$scope.index].y);
             var s = new createjs.Shape(g);
             $scope.stage.addChild(s);
         }
-        index++;
-
-        // Stageの描画を更新します
-        //stage.update();
+        $scope.index++;
+        $scope.$apply('index');
     }
  
 }]);

@@ -42,3 +42,11 @@ C:\Users\RedpeaksDev\Desktop\Angular_Graph\WebAPIController\bin\Debug\System.Web
 C:\Users\RedpeaksDev\Desktop\Angular_Graph\WebAPIController\bin\Debug\System.Net.Http.Formatting.xml
 C:\Users\RedpeaksDev\Desktop\Angular_Graph\WebAPIController\obj\Debug\WebAPIController.dll
 C:\Users\RedpeaksDev\Desktop\Angular_Graph\WebAPIController\obj\Debug\WebAPIController.pdb
+C:\Users\RedpeaksDev\Documents\GitHub\canvasplot\WebAPIController\bin\Debug\WebAPIController.dll
+C:\Users\RedpeaksDev\Documents\GitHub\canvasplot\WebAPIController\bin\Debug\WebAPIController.pdb
+C:\Users\RedpeaksDev\Documents\GitHub\canvasplot\WebAPIController\bin\Debug\System.Web.Http.dll
+C:\Users\RedpeaksDev\Documents\GitHub\canvasplot\WebAPIController\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\RedpeaksDev\Documents\GitHub\canvasplot\WebAPIController\bin\Debug\System.Web.Http.xml
+C:\Users\RedpeaksDev\Documents\GitHub\canvasplot\WebAPIController\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\RedpeaksDev\Documents\GitHub\canvasplot\WebAPIController\obj\Debug\WebAPIController.dll
+C:\Users\RedpeaksDev\Documents\GitHub\canvasplot\WebAPIController\obj\Debug\WebAPIController.pdb

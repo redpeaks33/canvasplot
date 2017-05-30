@@ -1,5 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="../js/controller.js" />
+/// <reference path="../js/controller_back.js" />
 /// <reference path="angular.js" />
 /// <reference path="angular-mocks.js" />
 /// <reference path="bootstrap.js" />
