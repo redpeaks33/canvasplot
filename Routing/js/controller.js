@@ -3,7 +3,6 @@
 main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeout) {
     $scope.Message = 'Click Button';
     $scope.charts = [];
-
     var chartSizeInfo = {
         canvasSizeX: 500,
         canvasSizeY: 300,
@@ -13,7 +12,7 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
         xMin: 0,
         yMax: 300,
         yMin: 0,
-        T: 32768
+        T: 16384
     };
     var chartDrawInfo = {
         fps: 3,
@@ -43,7 +42,7 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
         createjs.Ticker.setFPS(chartDrawInfo.fps);
         
     }
-
+    //#region initialize canvas
     var initializeCanvas = function()
     {
         $scope.stage = new createjs.Stage('canvas_id');
@@ -55,6 +54,7 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
 
         drawAxis();
     }
+    //#endregion
 
     //#region initialize data
     var dataPoints = [];
@@ -123,6 +123,7 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
         $scope.stage.addChild(s);
     }
     //#endregion
+
     //#region tick method
     $scope.index = 0;
     var handleTick = function () {
