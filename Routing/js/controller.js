@@ -16,7 +16,7 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
     };
     var chartDrawInfo = {
         fps: 3,
-        appendCount: 1024 //128,256,512,1024,2048 //slow - fast
+        appendCount: 512 //128,256,512,1024,2048 //slow - fast
     }
     $scope.initialize = function()
     {
@@ -27,21 +27,18 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
     $scope.tabClicked = function(type)
     {
         initializeCanvas();
-        initializeData();
+        initializeData(0,0);
         transformCoordination();
         
 
         //static
-        //drawAllPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, chartSizeInfo.T);
+        drawAllPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, chartSizeInfo.T);
 
         //dynamic
-        //createjs.Ticker.addEventListener("tick", $scope.stage);
-        //createjs.Ticker.timingMode = createjs.Ticker.RAF;
-
-        createjs.Ticker.addEventListener("tick", handleTick);
-        createjs.Ticker.setFPS(chartDrawInfo.fps);
-        
+        //createjs.Ticker.addEventListener("tick", handleTick);
+        //createjs.Ticker.setFPS(chartDrawInfo.fps);
     }
+
     //#region initialize canvas
     var initializeCanvas = function()
     {
@@ -53,20 +50,141 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
         $scope.stage.update();
 
         drawAxis();
+
+        drawDragSample();
+        //$scope.stage.on("stagemousedown", function (evt) {
+        //    //alert("the canvas was clicked at " + evt.stageX + "," + evt.stageY);
+        //});
+        //$scope.stage.on("stagemouseup", function (evt) {
+        //    alert("the canvas was clicked at " + evt.stageX + "," + evt.stageY);
+        //});
     }
     //#endregion
+    var dragger = new createjs.Container();
+    var drawDragSample = function () {
+        //$scope.stage.mouseMoveOutside = true;
+
+        //var circle = new createjs.Shape();
+        //circle.graphics.beginFill("red").drawCircle(0, 0, 50);
+
+        //var label = new createjs.Text("drag me", "bold 14px Arial", "#FFFFFF");
+        //label.textAlign = "center";
+        //label.y = -7;
+        //var maskShape = new createjs.Shape();
+        //maskShape.graphics.beginFill('red').drawRect(5, 5, 200, 200); // x, y, width, height
+        //dragger.addChild(maskShape);
+
+        //dragger.x = dragger.y = 0;
+        ////dragger.addChild(circle, label);
+        //$scope.stage.addChild(dragger);
+
+        //dragger.on("pressmove", function (evt) {
+        //    //$scope.stage.clear();
+        //    // currentTarget will be the container that the event listener was added to:
+        //    evt.currentTarget.x = evt.stageX;
+        //    evt.currentTarget.y = evt.stageY;
+        //    // make sure to redraw the stage to show the change:
+        //    //$scope.stage.update();
+        //});
+        //dragger.on("pressup", function (evt) {
+        //    $scope.stage.clear();
+        //    dragger.removeAllChildren();
+        //    points = [];
+        //    initializeDataRandom();
+        //    transformCoordination();
+        //    drawAllPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, chartSizeInfo.T);
+
+        //});
+        var downPosX, downPosY, upPosX, upPosY;
+        $scope.stage.on("stagemousedown", function (evt) {
+            downPosX = evt.stageX;
+            downPosY = evt.stageY;
+            //dragger.removeAllChildren();
+            //points = [];
+            //initializeDataRandom();
+            //transformCoordination();
+            //drawAllPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, chartSizeInfo.T);
+        });
+        $scope.stage.on("stagemousemove", function (evt) {
+            $scope.x = evt.stageX;
+            $scope.y = evt.stageY;
+        });
+        $scope.stage.on("stagemouseup", function (evt) {
+            upPosX = evt.stageX;
+            upPosY = evt.stageY;
+
+            let dX = upPosX - downPosX;
+            let dY = upPosY - downPosY;
+
+            $scope.stage.clear();
+            points = [];
+            //drag
+            {
+                //initializeData(-dX, dY);
+                //transformCoordination();
+                //drawAllPlots(points, chartSizeInfo.xMax - dX, chartSizeInfo.xMin - dY, chartSizeInfo.yMax + dY, chartSizeInfo.yMin + dY, chartSizeInfo.T);
+                //var offset = { x: $scope.stage.x - e.stageX, y: $scope.stage.y - e.stageY };
+                // modify logic because of unright  
+                $scope.stage.x = evt.stageX + dX;
+                $scope.stage.y = evt.stageY + dY;
+                $scope.stage.update();
+            }
+
+            //zoom
+            {
+                // modify logic because of unright  
+                //$scope.stage.x = $scope.stage.mouseX;
+                //$scope.stage.y = $scope.stage.mouseY;
+                //$scope.stage.regX = (downPosX + upPosX) / 2;
+                //$scope.stage.regY = (downPosY + upPosY) / 2;
+                //$scope.stage.scaleX = $scope.stage.scaleX * 1.20;
+                //$scope.stage.scaleY = $scope.stage.scaleY * 1.20;
+                //$scope.stage.update();
+            }
+         });
+        $scope.stage.update();
+
+    }
+
+    //var drawDragSample = function()
+    //{
+    //    $scope.stage.mouseMoveOutside = true;
+
+    //    var circle = new createjs.Shape();
+    //    circle.graphics.beginFill("red").drawCircle(0, 0, 50);
+
+    //    var label = new createjs.Text("drag me", "bold 14px Arial", "#FFFFFF");
+    //    label.textAlign = "center";
+    //    label.y = -7;
+
+    //    var dragger = new createjs.Container();
+    //    dragger.x = dragger.y = 0;
+    //    dragger.addChild(circle, label);
+    //    $scope.stage.addChild(dragger);
+
+    //    dragger.on("pressmove", function (evt) {
+    //        $scope.stage.clear();
+    //        // currentTarget will be the container that the event listener was added to:
+    //        evt.currentTarget.x = evt.stageX;
+    //        evt.currentTarget.y = evt.stageY;
+    //        // make sure to redraw the stage to show the change:
+    //        $scope.stage.update();
+    //    });
+
+    //    $scope.stage.update();
+    //}
 
     //#region initialize data
     var dataPoints = [];
-    var initializeData = function () {
+    var initializeData = function (dX,dY) {
         var limit = chartSizeInfo.T;    //increase number of dataPoints by increasing this
         dataPoints = [];
         for (var i = 0; i < limit; i++)
         {
             dataPoints.push({
                 t: 0.002 * i,
-                x: i % 500,
-                y: (i / 500) * 3 + 3, 
+                x: i % 500 -dX,
+                y: (i / 500) * 6 + 3 -dY, 
             });
         }
     }
@@ -127,7 +245,13 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
     //#region tick method
     $scope.index = 0;
     var handleTick = function () {
-        drawAppendPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, $scope.index , chartDrawInfo.appendCount);
+        //$scope.stage.clear();
+        //points = [];
+        //initializeDataRandom();
+        //transformCoordination();
+        //drawAllPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, chartSizeInfo.T);
+
+        //drawAppendPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, $scope.index , chartDrawInfo.appendCount);
     }
     //#endregion
 
@@ -166,7 +290,16 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
         shape.graphics.beginFill("Red");
         shape.graphics.drawCircle(points[endIndex].x, points[endIndex].y, 1);
         $scope.stage.addChild(shape);
+        //5dragger.addChild(shape);
         shape.draw(ctx);
+
+
+
+        //var shape = new createjs.Shape();
+        //shape.graphics.beginFill("Red");
+        //shape.graphics.drawCircle(points[endIndex].x, points[endIndex].y, 1);
+        //$scope.stage.addChild(shape);
+        //shape.draw(ctx);
 
         //if (startIndex != 0) {
         //    var g = new createjs.Graphics();
@@ -185,4 +318,6 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
         $scope.tickTime = createjs.Ticker.getMeasuredTickTime();
     }
     //#endregion
+
+
 }]);
