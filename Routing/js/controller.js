@@ -4,15 +4,15 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
     $scope.Message = 'Click Button';
     $scope.charts = [];
     var chartSizeInfo = {
-        canvasSizeX: 500,
-        canvasSizeY: 300,
+        canvasSizeX: 1000,
+        canvasSizeY: 600,
         axisXPadding: 40,
         axisYPadding: 40,
-        xMax: 500,
+        xMax: 1000,
         xMin: 0,
-        yMax: 300,
+        yMax: 600,
         yMin: 0,
-        T: 16384
+        T: 16384 
     };
     var chartDrawInfo = {
         fps: 3,
@@ -26,23 +26,24 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
     var ctx = {};
     $scope.tabClicked = function(type)
     {
-        initializeCanvas();
+        initializeCanvas('canvas_id');
+        //initializeCanvas('canvas_id2');
         initializeData(0,0);
         transformCoordination();
         
 
         //static
-        drawAllPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, chartSizeInfo.T);
+        //drawAllPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, chartSizeInfo.T);
 
         //dynamic
-        //createjs.Ticker.addEventListener("tick", handleTick);
-        //createjs.Ticker.setFPS(chartDrawInfo.fps);
+        createjs.Ticker.addEventListener("tick", handleTick);
+        createjs.Ticker.setFPS(chartDrawInfo.fps);
     }
 
     //#region initialize canvas
-    var initializeCanvas = function()
+    var initializeCanvas = function (canvasID)
     {
-        $scope.stage = new createjs.Stage('canvas_id');
+        $scope.stage = new createjs.Stage(canvasID);
         ctx = $scope.stage.canvas.getContext('2d');
         $scope.stage.autoClear = false;
         $scope.stage.clear();
@@ -50,7 +51,6 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
         $scope.stage.update();
 
         drawAxis();
-
         drawDragSample();
         //$scope.stage.on("stagemousedown", function (evt) {
         //    //alert("the canvas was clicked at " + evt.stageX + "," + evt.stageY);
@@ -194,8 +194,8 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
         for (var i = 0; i < limit; i++) {
             dataPoints.push({
                 t: 0.002 * i,
-                x: Math.floor((Math.random() * 500) + 1),
-                y: Math.floor((Math.random() * 300) + 1),
+                x: Math.floor((Math.random() * 1000) + 1),
+                y: Math.floor((Math.random() * 600) + 1),
             });
         }
     }
@@ -245,11 +245,11 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
     //#region tick method
     $scope.index = 0;
     var handleTick = function () {
-        //$scope.stage.clear();
-        //points = [];
-        //initializeDataRandom();
-        //transformCoordination();
-        //drawAllPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, chartSizeInfo.T);
+        $scope.stage.clear();
+        points = [];
+        initializeDataRandom();
+        transformCoordination();
+        drawAllPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, chartSizeInfo.T);
 
         //drawAppendPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, $scope.index , chartDrawInfo.appendCount);
     }
