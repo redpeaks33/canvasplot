@@ -1,0 +1,2 @@
+﻿id に変数を渡せない
+$timeout使わずにLinkとCompileで上手くやりたい

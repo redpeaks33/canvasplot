@@ -26,39 +26,32 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
     var ctx = {};
     $scope.tabClicked = function(type)
     {
-        initializeCanvas('canvas_id_dummy');
+        initializeCanvas('canvas_id');
         //initializeCanvas('canvas_id2');
         initializeData(0,0);
-        //transformCoordination();
+        transformCoordination();
         
 
         //static
         //drawAllPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, chartSizeInfo.T);
 
         //dynamic
-        //createjs.Ticker.addEventListener("tick", handleTick);
-        //createjs.Ticker.setFPS(chartDrawInfo.fps);
+        createjs.Ticker.addEventListener("tick", handleTick);
+        createjs.Ticker.setFPS(chartDrawInfo.fps);
     }
 
     //#region initialize canvas
     var initializeCanvas = function (canvasID)
     {
         $scope.stage = new createjs.Stage(canvasID);
-        var circle = new createjs.Shape();
-        circle.graphics.beginFill("Red").drawCircle(0, 0, 50);
-        circle.x = 100;
-        circle.y = 100;
-        $scope.stage.addChild(circle);
+        ctx = $scope.stage.canvas.getContext('2d');
+        $scope.stage.autoClear = false;
+        $scope.stage.clear();
+        $scope.index = 0;
         $scope.stage.update();
 
-        //ctx = $scope.stage.canvas.getContext('2d');
-        //$scope.stage.autoClear = false;
-        //$scope.stage.clear();
-        //$scope.index = 0;
-        //$scope.stage.update();
-
-        //drawAxis();
-        //drawDragSample();
+        drawAxis();
+        drawDragSample();
         //$scope.stage.on("stagemousedown", function (evt) {
         //    //alert("the canvas was clicked at " + evt.stageX + "," + evt.stageY);
         //});
@@ -182,13 +175,13 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
     //}
 
     //#region initialize data
-    $scope.dataPoints = [];
+    var dataPoints = [];
     var initializeData = function (dX,dY) {
         var limit = chartSizeInfo.T;    //increase number of dataPoints by increasing this
-        $scope.dataPoints = [];
+        dataPoints = [];
         for (var i = 0; i < limit; i++)
         {
-            $scope.dataPoints.push({
+            dataPoints.push({
                 t: 0.002 * i,
                 x: i % 500 -dX,
                 y: (i / 500) * 6 + 3 -dY, 
