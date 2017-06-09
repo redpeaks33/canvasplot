@@ -6,5 +6,8 @@
     border:1px solid blue;
 }
 body{
-
+    background-color:gray;
+}
+canvas{
+     border:1px solid blue;
 }
