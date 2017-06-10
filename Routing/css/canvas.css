@@ -24,7 +24,14 @@ canvas{
     background-color:red;
 
 }
-.lightchart canvas{
+.lightchart canvas:nth-child(n){
     position:absolute;
 }
+.lightchart canvas:nth-child(1){
+    z-index:1;
+}
+.lightchart canvas:nth-child(2){
+    z-index:0;
+}
+
 

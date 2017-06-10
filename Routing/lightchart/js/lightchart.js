@@ -36,50 +36,37 @@
                 $timeout(function () {
                     initializeCanvas();
 
-                    //initializeDataRandom();
-                    //transformCoordination();
-                    //drawAllPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, chartSizeInfo.T);
-                    //$scope.stage.update();
-
-                    //static
+                     //static
                     //drawChart();
 
                     //dynamic
-                    //createjs.Ticker.addEventListener("tick", handleTick);
-                    //createjs.Ticker.timingMode = createjs.Ticker.RAF;
+                    createjs.Ticker.addEventListener("tick", handleTick);
+                    createjs.Ticker.timingMode = createjs.Ticker.RAF;
                     //createjs.Ticker.setFPS(chartDrawInfo.fps);
                 });
             }
-            //#region initialize canvas
 
+            //#region initialize canvas
             function initializeCanvas(canvasID) {
                 $scope.stage = new createjs.Stage($scope.chartid);
                 ctx = $scope.stage.canvas.getContext('2d');
 
                 $scope.stage_background = new createjs.Stage('chart_background');
                 ctx_back = $scope.stage_background.canvas.getContext('2d');
-                
-                //drawAxis();
-                //handleTick();
-                //var circle = new createjs.Shape();
-                //circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
-                //circle.x = 100;
-                //circle.y = 100;
-                //$scope.stage.addChild(circle);
-                //$scope.stage.update();
-                
-                //stageImgData = ctx.createImageData(chartSizeInfo.canvasSizeX, chartSizeInfo.canvasSizeY);
-                //$scope.stage.autoClear = false;
-                //$scope.stage.clear();
-                //$scope.index = 0;
-                //$scope.stage.update();
 
-                ///drawDragSample();
-                
-
+                var element = document.getElementById('chart_background');
+                //var element = document.getElementById($scope.chartid);
+                element.addEventListener("mouseup", function (evt) {
+                    alert("the canvas was clicked at " + evt.pageX + "," + evt.pageY);
+                });
+                element.addEventListener("mousedown", function (evt) {
+                    var imgData = ctx.getImageData(0, 0, chartSizeInfo.canvasSizeX, chartSizeInfo.canvasSizeY);
+                    ctx.scale(3, 3);
+                    ctx.putImageData(imgData, 100, 190);
+                    //alert("the canvas was clicked at " + evt.pageX + "," + evt.pageY);
+                });
             }
 
-            ///////////////////////////////////////////////////////////////////////////////////
             var initializeDataRandom = function () {
                 var limit = chartSizeInfo.T;    //increase number of dataPoints by increasing this
                 $scope.plotdata = [];
@@ -91,6 +78,8 @@
                     });
                 }
             }
+            //#endregion
+
             //#region transform coordination
             function convertScaleValue(originalPoints) {
                 var convertedPoints = [];
@@ -120,29 +109,8 @@
                 return  convertedPoints;
             }
             //#endregion
-            //#region draw axis
-            function drawAxis() {
-                drawAxisX();
-                drawAxisY();
-            }
-            function drawAxisX() {
-                var g = new createjs.Graphics();
-                g.beginStroke("Black");
-                g.moveTo(0, chartSizeInfo.canvasSizeY - chartSizeInfo.axisXPadding);
-                g.lineTo(chartSizeInfo.canvasSizeX, chartSizeInfo.canvasSizeY - chartSizeInfo.axisXPadding);
-                var s = new createjs.Shape(g);
-                s.draw(ctx_back);
-            }
-            function drawAxisY() {
-                var g = new createjs.Graphics();
-                g.beginStroke("Black");
-                g.moveTo(chartSizeInfo.axisYPadding, 0);
-                g.lineTo(chartSizeInfo.axisYPadding, chartSizeInfo.canvasSizeY);
-                var s = new createjs.Shape(g);
-                s.draw(ctx_back);
-            }
-            //#endregion
 
+            //#region draw chart 
             var drawChart = function()
             {
                 drawWhiteCanvas();
@@ -176,19 +144,32 @@
                 //drawAppendPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, $scope.index , chartDrawInfo.appendCount);
             }
 
-            ////#region draw all plots
+            //#region draw axis
+            function drawAxis() {
+                drawAxisX();
+                drawAxisY();
+            }
+            function drawAxisX() {
+                var g = new createjs.Graphics();
+                g.beginStroke("Black");
+                g.moveTo(0, chartSizeInfo.canvasSizeY - chartSizeInfo.axisXPadding);
+                g.lineTo(chartSizeInfo.canvasSizeX, chartSizeInfo.canvasSizeY - chartSizeInfo.axisXPadding);
+                var s = new createjs.Shape(g);
+                s.draw(ctx_back);
+            }
+            function drawAxisY() {
+                var g = new createjs.Graphics();
+                g.beginStroke("Black");
+                g.moveTo(chartSizeInfo.axisYPadding, 0);
+                g.lineTo(chartSizeInfo.axisYPadding, chartSizeInfo.canvasSizeY);
+                var s = new createjs.Shape(g);
+                s.draw(ctx_back);
+            }
+            //#endregion
+
+            //#region draw all plots
             function drawAllPlots (points, xMax, xMin, yMax, yMin, currentTime) {
-                //_.each(points, function (n, i) {
-                //    if (i + 1 < currentTime) {
-                //        drawPlot(points, i, i + 1);
-                //    }
-                //});
-
-                //var stageCanvas = document.getElementById("canvas8");
-                //ctx = stageCanvas.getContext("2d");
-
                 //plot data
-                //points = $scope.plotdata;
                 _.each(points, function (n) {
                     var index = (n.x + n.y * chartSizeInfo.canvasSizeX) * 4;
                     stageImgData.data[index + 0] = 255;
@@ -205,64 +186,9 @@
             }
             //#endregion
 
-            //#region draw plot
-            function drawPlot (points, startIndex, endIndex) {
-                var shape = new createjs.Shape();
-                shape.graphics.beginFill("Red");
-                shape.graphics.drawCircle(points[endIndex].x, points[endIndex].y, 1);
-                $scope.stage.addChild(shape);
-                //5dragger.addChild(shape);
-                shape.draw(ctx);
-
-                //var shape = new createjs.Shape();
-                //shape.graphics.beginFill("Red");
-                //shape.graphics.drawCircle(points[endIndex].x, points[endIndex].y, 1);
-                //$scope.stage.addChild(shape);
-                //shape.draw(ctx);
-
-                //if (startIndex != 0) {
-                //    var g = new createjs.Graphics();
-                //    g.beginStroke("Blue");
-                //    g.moveTo(points[startIndex - 1].x, points[startIndex - 1].y);
-                //    g.lineTo(points[endIndex].x, points[endIndex].y);
-                //    var s = new createjs.Shape(g);
-                //    $scope.stage.addChild(s);
-                //    s.draw(ctx);
-                //    //g.clear();
-                //    //$scope.stage.cache(0,0,300,300);
-                //}
-                //$scope.stage.clear();
-            }
             //#endregion
         }],
         link: function (scope, element, attr, tableFilterCtrl) {
-            //initialize();
-            //function initialize() {
-            //    initializeLayout(element);
-            //    //add title.
-            //    scope.dropdownLabel = scope.title;
-
-            //    //in case of using title only without filter
-            //    if (scope.disable) {
-            //        return;
-            //    }
-
-            //    //initialize collection
-            //    scope.original = tableFilterCtrl.getOriginalCollection();
-            //    scope.showing = tableFilterCtrl.getShowingCollection();
-            //    scope.distinctItems = createDistinctItems();
-
-            //    //set this column state to parent filter container .
-            //    updateParentFilterContainer();
-            //}
-
-            //scope.showCheckedItem = function () {
-            //    updateParentFilterContainer();
-            //};
-
-            //scope.$on('updateFilterInfo', function (event, filterInfoContainer) {
-            //    tableFilterCtrl.getFilterInfoContainer()[scope.predicate] = filterInfoContainer[scope.predicate]
-            //});
         },
     };
 });
