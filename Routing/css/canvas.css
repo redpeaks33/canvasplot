@@ -11,3 +11,20 @@ body{
 canvas{
      border:1px solid blue;
 }
+
+.chartContainer{
+    display:flex
+}
+
+.chartContainer chart{
+    
+}
+
+.lightchart{
+    background-color:red;
+
+}
+.lightchart canvas{
+    position:absolute;
+}
+
