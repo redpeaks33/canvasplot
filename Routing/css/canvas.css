@@ -13,16 +13,14 @@ canvas{
 }
 
 .chartContainer{
-    display:flex
-}
-
-.chartContainer chart{
-    
+    display:flex;
+    border:1px solid red;
+    margin-left:-15px;
+    margin-top:10px;
 }
 
 .lightchart{
-    background-color:red;
-
+    background-color:white;
 }
 .lightchart canvas:nth-child(n){
     position:absolute;
@@ -33,5 +31,7 @@ canvas{
 .lightchart canvas:nth-child(2){
     z-index:0;
 }
+
+
 
 

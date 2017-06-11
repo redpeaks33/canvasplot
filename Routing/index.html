@@ -39,10 +39,17 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" ng-click="tabClicked('dygraph')">Dygraph</a></li>
                     </ul>
-                    <div class="chartContainer">
-                        <light-Chart chartid="canvas1" title="dircanvas1" width="600" height="800" plotdata="dataPoints"></light-Chart>
+                    <div class="col-lg-6">
+                        <div class="chartContainer">
+                            <light-Chart chartid="canvas1" backgroundid="back1" title="dircanvas1" width="650" height="800" plotdata="dataPoints"></light-Chart>
+                        </div>
                     </div>
-                </div>
+                    <div class="col-lg-6">
+                        <div class="chartContainer">
+                            <light-Chart chartid="canvas2" backgroundid="back2" title="dircanvas1" width="650" height="800" plotdata="dataPoints"></light-Chart>
+                        </div>
+                    </div>
+               </div>
             </div>
         </div>
     </div>

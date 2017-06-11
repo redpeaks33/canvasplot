@@ -5,6 +5,7 @@
         scope: {
             title: '@',
             chartid: '@',
+            backgroundid: '@',
             width: '=',
             height: '=',
             plotdata: '='
@@ -54,12 +55,14 @@
                 $scope.stage = new createjs.Stage($scope.chartid);
                 ctx = $scope.stage.canvas.getContext('2d');
 
-                $scope.stage_background = new createjs.Stage('chart_background');
+                $scope.stage_background = new createjs.Stage($scope.backgroundid);
                 ctx_back = $scope.stage_background.canvas.getContext('2d');
 
                 drawWhiteCanvas();
 
-                var element = document.getElementById('chart_background');
+                //var element = document.getElementById('chart_background');
+
+                var element = document.getElementById($scope.backgroundid);
                 //var element = document.getElementById($scope.chartid);
                 element.addEventListener("mouseup", function (evt) {
                     alert("the canvas was clicked at " + evt.pageX + "," + evt.pageY);
@@ -138,6 +141,7 @@
                 for (var i = 0; i < stageImgData.data.length ; i++) {
                     stageImgData.data[i] = 255;
                 };
+                ctx.putImageData(stageImgData, 0, 0)
             }
 
 
