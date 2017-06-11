@@ -22,22 +22,27 @@
     <script src="https://code.createjs.com/createjs-2015.05.21.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/chart.css">
     <link rel="stylesheet" type="text/css" href="/css/canvas.css" />
+    <link rel="stylesheet" type="text/css" href="/css/charttimer.css" />
     <script src="/js/controller.js"></script>
     <script src="/custom/js/directive.js"></script>
     <script src="/lightchart/js/lightchart.js"></script>
-
+    <script src="/lightchart/js/charttimer.js"></script>
 </head>
 <body>
     <div ng-controller="MyController" ng-init="initialize()">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-3">
+                    <chart-Timer plotdata="dataPoints"></chart-Timer>
+                </div>
+                <div class="col-lg-9">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" ng-click="tabClicked('dygraph')">Dygraph</a></li>
                     </ul>
                     <div class="chartContainer">
-                        <light-Chart chartid="canvas1" title="dircanvas1" width="500" height="300" plotdata="dataPoints"></light-Chart>
+                        <light-Chart chartid="canvas1" title="dircanvas1" width="600" height="800" plotdata="dataPoints"></light-Chart>
                     </div>
+                </div>
             </div>
         </div>
     </div>

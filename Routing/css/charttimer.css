@@ -1,0 +1,9 @@
+﻿.buttonContainer{
+    display:flex;
+}
+
+.buttonContainer button:nth-child(n){
+    flex-basis:15%;
+    margin:5px;
+}
+

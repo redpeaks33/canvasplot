@@ -24,18 +24,19 @@
             };
             var chartDrawInfo = {
                 fps:2   ,
-                appendCount: 512 //128,256,512,1024,2048 //slow - fast
+                appendCount: 1024 //128,256,512,1024,2048 //slow - fast
             }
             var ctx = {};
             var ctx_back = {};
             var points = [];
             var stageImgData;
             initialize();
-
+            $scope.index = 0;
             function initialize() {
+                
                 $timeout(function () {
                     initializeCanvas();
-
+                    
                      //static
                     //drawChart();
 
@@ -48,11 +49,15 @@
 
             //#region initialize canvas
             function initializeCanvas(canvasID) {
+                initializeDataRandom();
+
                 $scope.stage = new createjs.Stage($scope.chartid);
                 ctx = $scope.stage.canvas.getContext('2d');
 
                 $scope.stage_background = new createjs.Stage('chart_background');
                 ctx_back = $scope.stage_background.canvas.getContext('2d');
+
+                drawWhiteCanvas();
 
                 var element = document.getElementById('chart_background');
                 //var element = document.getElementById($scope.chartid);
@@ -74,7 +79,7 @@
                     $scope.plotdata.push({
                         t: 0.002 * i,
                         x: Math.floor((Math.random() * 250) + 1),
-                        y: Math.floor((Math.random() * 150) + 1),
+                        y: i,//Math.floor((Math.random() * 150) + 1),
                     });
                 }
             }
@@ -135,13 +140,20 @@
                 };
             }
 
+
             var handleTick = function () {
-                drawWhiteCanvas();
+                if (execute) {
+                    drawExecute();
+                }
+            }
+
+            function drawExecute() {
+                
                 drawAxis();
-                initializeDataRandom();
+                //initializeDataRandom();
                 calculatePlot();
-                drawAllPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, chartSizeInfo.T);
-                //drawAppendPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, $scope.index , chartDrawInfo.appendCount);
+                //drawAllPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, chartSizeInfo.T);
+                drawAppendPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, $scope.index, chartDrawInfo.appendCount);
             }
 
             //#region draw axis
@@ -149,6 +161,7 @@
                 drawAxisX();
                 drawAxisY();
             }
+
             function drawAxisX() {
                 var g = new createjs.Graphics();
                 g.beginStroke("Black");
@@ -167,25 +180,76 @@
             }
             //#endregion
 
+            //#region draw append plots
+            var drawAppendPlots = function (points, xMax, xMin, yMax, yMin, currentTime, appendCount) {
+                //step forward or step back
+                $scope.index = reverse ? $scope.index - appendCount : $scope.index + appendCount
+
+                if ($scope.index >= 0 && $scope.index < chartSizeInfo.T) {
+                    drawAllPlots(points, xMax, xMin, yMax, yMin, $scope.index);
+                }
+                else {
+                    $scope.index = 0;
+                    drawWhiteCanvas();
+                }
+
+                //if ($scope.index > chartSizeInfo.T) {
+                //    initializeCanvas();
+                //}
+            }
+            //#endregion
+
             //#region draw all plots
-            function drawAllPlots (points, xMax, xMin, yMax, yMin, currentTime) {
+            function drawAllPlots(points, xMax, xMin, yMax, yMin, currentTime) {
                 //plot data
-                _.each(points, function (n) {
-                    var index = (n.x + n.y * chartSizeInfo.canvasSizeX) * 4;
-                    stageImgData.data[index + 0] = 255;
-                    stageImgData.data[index + 1] = 0;
-                    stageImgData.data[index + 2] = 0;
-                    stageImgData.data[index + 3] = 255;
+                _.each(points, function (n, i) {
+                    if (i <= currentTime) {
+                        var index = (n.x + n.y * chartSizeInfo.canvasSizeX) * 4;
+                        stageImgData.data[index + 0] = 255;
+                        stageImgData.data[index + 1] = 0;
+                        stageImgData.data[index + 2] = 0;
+                        stageImgData.data[index + 3] = 255;
+                    }
                 });
 
                 ctx.putImageData(stageImgData, 0, 0)
 
                 $scope.fps = createjs.Ticker.getMeasuredFPS();
                 $scope.tickTime = createjs.Ticker.getMeasuredTickTime();
-                //$scope.$apply();
+                $scope.$apply();
             }
             //#endregion
+            //#endregion
 
+            //#region event
+
+            var execute = false;
+            var reverse = false;
+            $scope.$on('start',function(e){
+                execute = true;
+            });
+            $scope.$on('reset', function (e) {
+                $scope.index = 0;
+                execute = false;
+                drawExecute();
+            });
+
+            $scope.$on('stop', function (e) {
+                execute = false;
+            });
+
+            $scope.$on('stepforward', function (e) {
+                execute = false;
+                reverse = false;
+                drawExecute();
+            });
+
+            $scope.$on('stepback', function (e) {
+                execute = false;
+                reverse = true;
+                drawExecute();
+            });
+            //#endregion
             //#endregion
         }],
         link: function (scope, element, attr, tableFilterCtrl) {

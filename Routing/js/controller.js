@@ -15,7 +15,7 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
 
     $scope.dataPoints = [];
     var initializeData = function (dX,dY) {
-        var limit = 32768    //increase number of dataPoints by increasing this
+        var limit = 32786    //increase number of dataPoints by increasing this
         $scope.dataPoints = [];
         for (var i = 0; i < limit; i++)
         {

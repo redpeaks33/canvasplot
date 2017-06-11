@@ -73,13 +73,16 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\charttimer.css" />
     <Content Include="css\webglcanvas.css" />
     <Content Include="css\canvas.css" />
     <Content Include="css\chart.css" />
     <Content Include="index.html" />
     <Content Include="index_animationChart.html" />
     <Content Include="js\controller_back0610.js" />
+    <Content Include="lightchart\html\charttimer.html" />
     <Content Include="lightchart\js\lightchart_bak.js" />
+    <Content Include="lightchart\js\charttimer.js" />
     <Content Include="memo.txt" />
     <Content Include="js\controller_back0606.js" />
     <Content Include="lightchart\html\lightchart.html" />

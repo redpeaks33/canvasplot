@@ -2,6 +2,7 @@
 /// <reference path="../js/controller.js" />
 /// <reference path="../js/controller_back0606.js" />
 /// <reference path="../js/controller_back0610.js" />
+/// <reference path="../lightchart/js/charttimer.js" />
 /// <reference path="../lightchart/js/lightchart.js" />
 /// <reference path="../lightchart/js/lightchart_bak.js" />
 /// <reference path="angular.js" />
