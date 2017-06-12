@@ -25,7 +25,7 @@
             };
             var chartDrawInfo = {
                 fps:2   ,
-                appendCount: 1024 //128,256,512,1024,2048 //slow - fast
+                appendCount: 4096 //128,256,512,1024,2048 //slow - fast
             }
             var ctx = {};
             var ctx_back = {};
@@ -82,7 +82,9 @@
                     $scope.plotdata.push({
                         t: 0.002 * i,
                         x: Math.floor((Math.random() * 250) + 1),
-                        y: i,//Math.floor((Math.random() * 150) + 1),
+                        y: Math.floor((Math.random() * 150) + 1),
+                    //    x: Math.random() * (Math.floor((Math.random() * 2) + 1) % 2 == 0 ? -1 : 1),//Math.floor((Math.random() * 250) + 1),
+                    //    y: Math.random() * (Math.floor((Math.random() * 2) + 1) % 2 == 0 ? -1 : 1),//Math.floor((Math.random() * 150) + 1),
                     });
                 }
             }
@@ -93,7 +95,11 @@
                 var convertedPoints = [];
                 var maxX = _.max(originalPoints, function (n) { return n.x; }).x;
                 var maxY = _.max(originalPoints, function (n) { return n.y; }).y;
+                //maxX = (maxX + 2) * 1000;
+                //maxY = (maxY + 2) * 1000;
                 _.each(originalPoints, function (n) {
+                    //n.x = (n.x + 2) * 1000;
+                    //n.y = (n.y + 2) * 1000;
                     convertedPoints.push({
                         t: n.t,
                         x: ~~(n.x * (chartSizeInfo.canvasSizeX - chartSizeInfo.axisYPadding) / maxX),
@@ -202,17 +208,18 @@
                 //}
             }
             //#endregion
-
+            var px = [0, 0, 0, 0, 0, 1, 2, -1, -2];
+            var py = [0, 1, 2, -1, -2, 0, 0, 0, 0];
             //#region draw all plots
             function drawAllPlots(points, xMax, xMin, yMax, yMin, currentTime) {
                 //plot data
                 _.each(points, function (n, i) {
-                    if (i <= currentTime) {
-                        var index = (n.x + n.y * chartSizeInfo.canvasSizeX) * 4;
-                        stageImgData.data[index + 0] = 255;
-                        stageImgData.data[index + 1] = 0;
-                        stageImgData.data[index + 2] = 0;
-                        stageImgData.data[index + 3] = 255;
+
+                    for (var p = 0; p< px.length; p++)
+                    {
+                        if (i <= currentTime) {
+                            setImageData(stageImgData, ((n.x + px[p]) + (n.y + py[p]) * chartSizeInfo.canvasSizeX) * 4);
+                        }
                     }
                 });
 
@@ -221,6 +228,12 @@
                 $scope.fps = createjs.Ticker.getMeasuredFPS();
                 $scope.tickTime = createjs.Ticker.getMeasuredTickTime();
                 $scope.$apply();
+            }
+            function setImageData(stageImgData,index) {
+                stageImgData.data[index + 0] = 255;
+                stageImgData.data[index + 1] = 0;
+                stageImgData.data[index + 2] = 0;
+                stageImgData.data[index + 3] = 255;
             }
             //#endregion
             //#endregion
