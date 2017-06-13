@@ -1,4 +1,6 @@
 ﻿/// <autosync enabled="true" />
+/// <reference path="../angular-bootstrap-slider-master/slider.js" />
+/// <reference path="../bootstrap-slider-master/dist/bootstrap-slider.js" />
 /// <reference path="../js/controller.js" />
 /// <reference path="../js/controller_back0606.js" />
 /// <reference path="../js/controller_back0610.js" />

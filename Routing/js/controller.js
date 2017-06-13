@@ -1,4 +1,4 @@
-﻿var main = angular.module("app", []);
+﻿var main = angular.module("app", ['ui.bootstrap-slider']);
 
 main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeout) {
     $scope.initialize = function()
@@ -21,8 +21,9 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
         {
             $scope.dataPoints.push({
                 t: 0.002 * i,
-                x: i % 250 - dX,
-                y: i  % 150 - dY,
+                //x: i % 250 - dX,
+                x: i % 10000 - dY,
+                y: i * 0.00001  - dY,
                 //y: Math.floor((Math.random() * 10000) + 1) - dY,
             });
         }

@@ -69,6 +69,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="angular-bootstrap-slider-master\slider.js" />
+    <Content Include="bootstrap-slider-master\dist\bootstrap-slider.js" />
+    <Content Include="bootstrap-slider-master\dist\bootstrap-slider.min.js" />
+    <Content Include="bootstrap-slider-master\dist\css\bootstrap-slider.css" />
+    <Content Include="bootstrap-slider-master\dist\css\bootstrap-slider.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />

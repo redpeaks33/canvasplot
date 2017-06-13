@@ -7,3 +7,10 @@
     margin:5px;
 }
 
+#ex1Slider .slider-selection {
+	background: #BABABA;
+   
+}
+#ex1Slider{
+     width:400px;
+}

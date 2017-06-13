@@ -25,7 +25,7 @@
             };
             var chartDrawInfo = {
                 fps:2   ,
-                appendCount: 4096 //128,256,512,1024,2048 //slow - fast
+                appendCount: 1024 //128,256,512,1024,2048 //slow - fast
             }
             var ctx = {};
             var ctx_back = {};
@@ -50,7 +50,7 @@
 
             //#region initialize canvas
             function initializeCanvas(canvasID) {
-                initializeDataRandom();
+                //initializeDataRandom();
 
                 $scope.stage = new createjs.Stage($scope.chartid);
                 ctx = $scope.stage.canvas.getContext('2d');
@@ -196,13 +196,17 @@
                 $scope.index = reverse ? $scope.index - appendCount : $scope.index + appendCount
 
                 if ($scope.index >= 0 && $scope.index < chartSizeInfo.T) {
-                    drawAllPlots(points, xMax, xMin, yMax, yMin, $scope.index);
+                    drawAllPlots(points, xMax, xMin, yMax, yMin, $scope.index, appendCount);
                 }
                 else {
                     $scope.index = 0;
                     drawWhiteCanvas();
                 }
 
+                if (!changeslider) {
+                    $rootScope.$broadcast('setCurrentTimeToSlider', $scope.index);
+                }
+               
                 //if ($scope.index > chartSizeInfo.T) {
                 //    initializeCanvas();
                 //}
@@ -211,13 +215,12 @@
             var px = [0, 0, 0, 0, 0, 1, 2, -1, -2];
             var py = [0, 1, 2, -1, -2, 0, 0, 0, 0];
             //#region draw all plots
-            function drawAllPlots(points, xMax, xMin, yMax, yMin, currentTime) {
+            function drawAllPlots(points, xMax, xMin, yMax, yMin, currentTime , appendCount) {
                 //plot data
                 _.each(points, function (n, i) {
-
-                    for (var p = 0; p< px.length; p++)
-                    {
-                        if (i <= currentTime) {
+                    if (currentTime - appendCount <= i && i <= currentTime) {
+                        for (var p = 0; p < px.length; p++)
+                        {
                             setImageData(stageImgData, ((n.x + px[p]) + (n.y + py[p]) * chartSizeInfo.canvasSizeX) * 4);
                         }
                     }
@@ -248,7 +251,7 @@
             $scope.$on('reset', function (e) {
                 $scope.index = 0;
                 execute = false;
-                drawExecute();
+                drawWhiteCanvas();
             });
 
             $scope.$on('stop', function (e) {
@@ -268,6 +271,14 @@
             });
             //#endregion
             //#endregion
+
+            //#region event
+            var changeslider = false;
+            $scope.$on('setCurrentTimeToGraph', function (e, value) {
+                $scope.index = value;
+                changeslider = true;
+                drawExecute();
+            })
         }],
         link: function (scope, element, attr, tableFilterCtrl) {
         },
