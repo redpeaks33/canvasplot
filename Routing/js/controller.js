@@ -20,7 +20,7 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
         for (var i = 0; i < limit; i++)
         {
             $scope.dataPoints.push({
-                t: 0.002 * i,
+                //t: 0.002 * i,
                 //x: i % 250 - dX,
                 x: i % 10000 - dY,
                 y: i * 0.00001  - dY,

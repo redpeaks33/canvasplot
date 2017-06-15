@@ -31,21 +31,32 @@
                 }
             });
 
-            var dragging = false;   
-            $("#ex1").on("slideStart", function (e) {
-                dragging = true;
+            var dragging = false;
+            var value = {newValue:0,oldValue:0}
+            slider.on("slide", function (e) {
+                value.oldValue = e;
             });
-            $("#ex1").on("change", function (e) {
-                if (dragging)
-                {
-                    $rootScope.$broadcast('setCurrentTimeToGraph', e.value.newValue);
+            slider.on("slideStart", function (e) {
+                dragging = true;
+                value.oldValue = e;
+            });
+            slider.on("slideStop", function (e) {
+                value.newValue = e;
+                if (dragging) {
+                    $rootScope.$broadcast('setCurrentTimeToGraph', e.newValue, e.oldValue);
                 }
+                dragging = false;
+            });
+            slider.on("change", function (e) {
+                //if (dragging)
+                //{
+                //    $rootScope.$broadcast('setCurrentTimeToGraph', e.newValue, e.oldValue);
+                //}
             });
 
             $scope.$on('setCurrentTimeToSlider',function(e,value){
                 dragging = false;
-                //$("#ex1").slider('setValue', 10000);
-                $('#ex1').slider('setValue', value);
+                slider.setValue(value);
                 
             })
         }],
