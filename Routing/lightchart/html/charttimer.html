@@ -1,5 +1,4 @@
 ﻿<div>
-
     <div class="buttonContainer">
         <button class="btn btn-primary" ng-click="start()"><span class="glyphicon glyphicon-play"></span></button>
         <button class="btn btn-primary" ng-click="reset()"><span class="glyphicon glyphicon-stop"></span></button>
@@ -8,7 +7,7 @@
         <button class="btn btn-primary" ng-click="stepforward()"><span class="glyphicon glyphicon-step-forward"></span></button>
         <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                <span class="glyphicon glyphicon-flash"></span> 
+                <span class="glyphicon glyphicon-flash"></span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -20,12 +19,14 @@
                 <li>1024</li>
             </ul>
         </div>
+        
     </div>
     <div class="sliderContainer">
         <!-- it can be used as an element -->
-        <input id="ex1" data-slider-id='ex1Slider' type="text" 
-               data-slider-min="0" data-slider-max="32768" data-slider-step="1" 
+        <span>{{sample}}</span>
+        <input id="ex1" data-slider-id='ex1Slider' type="text"
+               data-slider-min="0" data-slider-max="" data-slider-step="1"
                data-slider-value="0" />
-        {{length}}
+        
     </div>
 </div>

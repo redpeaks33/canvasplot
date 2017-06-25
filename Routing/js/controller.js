@@ -5,6 +5,7 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
     {
         //initializeData(0, 0);
         initializeDataRandom(0, 0);
+        $scope.length = $scope.dataPoints.length;
         $scope.tabClicked('tab1');
     };
 
@@ -21,8 +22,10 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
             $scope.tab1 = false;
             $scope.tab2 = true;
         }
-        //ClearCanvas
-        $scope.$broadcast('clearCanvas');
+        //Stop Animation on Canvas 
+        //Because memory is used even if canvas is not displayed.
+        $scope.$broadcast('stop');
+
         //Load CurrentTime
        
     }

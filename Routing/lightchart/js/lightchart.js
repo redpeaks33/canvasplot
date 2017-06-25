@@ -266,9 +266,6 @@
                 //}
             }
             //#endregion
-            $scope.$on('clearCanvas', function (e) {
-                execute = false;
-            });
         }],
 
     };

@@ -7,8 +7,10 @@
         },
         templateUrl: '/lightchart/html/charttimer.html',
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $rootScope, $timeout) {
-            $scope.length = Number($scope.plotdata.length);
-
+            $scope.sample = 333;// Number($scope.plotdata.length);
+            $timeout(function () {
+                $scope.$apply();
+            });
             $scope.start = function () {
                 $rootScope.$broadcast('start');
             }
