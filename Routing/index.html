@@ -42,16 +42,29 @@
                 </div>
                 <div class="col-lg-9">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" ng-click="tabClicked('dygraph')">Dygraph</a></li>
+                        <li class="active"><a data-toggle="tab" ng-click="tabClicked('tab1')">Chart x2</a></li>
+                        <li class=""><a data-toggle="tab" ng-click="tabClicked('tab2')">Chart x4</a></li>
                     </ul>
-                    <div class="col-lg-6">
-                        <div class="chartContainer">
+                    <div class="col-lg-6" ng-if="tab1">
+                        <div class="chartContainer1">
                             <light-Chart chartid="canvas1" backgroundid="back1" title="dircanvas1" width="650" height="800" dx="" dy="" plotdata="dataPoints"></light-Chart>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="chartContainer">
+                    <div class="col-lg-6" ng-if="tab1">
+                        <div class="chartContainer1">
                             <light-Chart chartid="canvas2" backgroundid="back2" title="dircanvas1" width="650" height="800" dx="" dy="" plotdata="dataPoints"></light-Chart>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" ng-if="tab2">
+                        <div class="chartContainer2">
+                            <light-Chart chartid="canvas1" backgroundid="back1" title="dircanvas1" width="650" height="400" dx="" dy="" plotdata="dataPoints"></light-Chart>
+                            <light-Chart chartid="canvas2" backgroundid="back1" title="dircanvas1" width="650" height="400" dx="" dy="" plotdata="dataPoints"></light-Chart>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" ng-if="tab2">
+                        <div class="chartContainer2">
+                            <light-Chart chartid="canvas3" backgroundid="back2" title="dircanvas1" width="650" height="400" dx="" dy="" plotdata="dataPoints"></light-Chart>
+                            <light-Chart chartid="canvas4" backgroundid="back2" title="dircanvas1" width="650" height="400" dx="" dy="" plotdata="dataPoints"></light-Chart>
                         </div>
                     </div>
                </div>

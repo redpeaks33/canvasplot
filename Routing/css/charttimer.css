@@ -7,6 +7,9 @@
     margin:5px;
 }
 
+.sliderContainer{
+    margin-top:100px;
+}
 #ex1Slider .slider-selection {
 	background: #BABABA;
    

@@ -22,25 +22,41 @@
     <script src="https://code.createjs.com/createjs-2015.05.21.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/chart.css">
     <link rel="stylesheet" type="text/css" href="/css/canvas.css" />
+    <link rel="stylesheet" type="text/css" href="/css/charttimer.css" />
     <script src="/js/controller.js"></script>
     <script src="/custom/js/directive.js"></script>
     <script src="/lightchart/js/lightchart.js"></script>
+    <script src="/lightchart/js/charttimer.js"></script>
 
+    <!-- slider -->
+    <script src="/angular-bootstrap-slider-master/slider.js"></script>
+    <link rel="stylesheet" type="text/css" href="/bootstrap-slider-master/dist/css/bootstrap-slider.min.css"/>
+    <script src="/bootstrap-slider-master/dist/bootstrap-slider.min.js"></script>
 </head>
 <body>
     <div ng-controller="MyController" ng-init="initialize()">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-3">
+                    <chart-Timer plotdata="dataPoints"></chart-Timer>
+                </div>
+                <div class="col-lg-9">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" ng-click="tabClicked('dygraph')">Dygraph</a></li>
                     </ul>
-                    <canvas width="600" height="400" id="canvas_id_dummy"></canvas>
-                    <light-Chart chartid="canvas8" title="dircanvas8" width="600" height="400" plotdata="dataPoints"></light-Chart>
-                </div>
+                    <div class="col-lg-6">
+                        <div class="chartContainer">
+                            <light-Chart chartid="canvas1" backgroundid="back1" title="dircanvas1" width="650" height="800" dx="" dy="" plotdata="dataPoints"></light-Chart>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="chartContainer">
+                            <light-Chart chartid="canvas2" backgroundid="back2" title="dircanvas1" width="650" height="800" dx="" dy="" plotdata="dataPoints"></light-Chart>
+                        </div>
+                    </div>
+               </div>
             </div>
         </div>
-
     </div>
 </body>
 </html>
