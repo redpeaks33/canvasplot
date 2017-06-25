@@ -34,7 +34,6 @@
             $scope.index = 0;
 
             initialize();
-            
 
             function initialize() {
                 $timeout(function () {
@@ -53,8 +52,6 @@
 
             //#region initialize canvas
             function initializeCanvas(canvasID) {
-                //initializeDataRandom();
-
                 $scope.stage = new createjs.Stage($scope.chartid);
                 ctx = $scope.stage.canvas.getContext('2d');
 
@@ -64,29 +61,6 @@
                 drawWhiteCanvas();
                 drawAxis();
                 calculatePlot();
-                //var element = document.getElementById('chart_background');
-                //var element = document.getElementById($scope.backgroundid);
-                ////var element = document.getElementById($scope.chartid);
-                //element.addEventListener("mouseup", function (evt) {
-                //    alert("the canvas was clicked at " + evt.pageX + "," + evt.pageY);
-                //});
-                //element.addEventListener("mousedown", function (evt) {
-                //    var imgData = ctx.getImageData(0, 0, chartSizeInfo.canvasSizeX, chartSizeInfo.canvasSizeY);
-                //    ctx.scale(3, 3);
-                //    ctx.putImageData(imgData, 100, 190);
-                //    //alert("the canvas was clicked at " + evt.pageX + "," + evt.pageY);
-                //});
-            }
-
-            var initializeDataRandom = function () {
-                var limit = chartSizeInfo.T;    //increase number of dataPoints by increasing this
-                $scope.plotdata = [];
-                for (var i = 0; i < limit; i++) {
-                    $scope.plotdata.push({
-                        x: Math.floor((Math.random() * 250) + 1),
-                        y: Math.floor((Math.random() * 150) + 1),
-                    });
-                }
             }
             //#endregion
 
@@ -277,16 +251,24 @@
             //#endregion
 
             //#region draw white canvas
-            var drawWhiteCanvas = function () {
-                //create white board
+            var drawWhiteCanvas = function ()
+            {
+                //if (!stageImgData)
+                //{
+                //    //create white board
+                //    for (var i = 0; i < stageImgData.data.length ; i++) {
+                //        stageImgData.data[i] = 255;
+                //    };
+                //    ctx.putImageData(stageImgData, 0, 0)
+                //}
+                //else {
                 stageImgData = ctx.createImageData(chartSizeInfo.canvasSizeX, chartSizeInfo.canvasSizeY);
-                for (var i = 0; i < stageImgData.data.length ; i++) {
-                    stageImgData.data[i] = 255;
-                };
-                ctx.putImageData(stageImgData, 0, 0)
+                //}
             }
             //#endregion
-
+            $scope.$on('clearCanvas', function (e) {
+                execute = false;
+            });
         }],
 
     };

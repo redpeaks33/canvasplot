@@ -22,6 +22,7 @@ main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeou
             $scope.tab2 = true;
         }
         //ClearCanvas
+        $scope.$broadcast('clearCanvas');
         //Load CurrentTime
        
     }
