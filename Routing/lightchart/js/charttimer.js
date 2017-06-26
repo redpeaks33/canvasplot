@@ -35,7 +35,7 @@
             });
 
             var dragging = false;
-            var value = {newValue:0,oldValue:0}
+            var value = { newValue: 0, oldValue: 0 }
             slider.on("slide", function (e) {
                 value.oldValue = e;
             });
@@ -57,10 +57,9 @@
                 //}
             });
 
-            $scope.$on('setCurrentTimeToSlider',function(e,value){
+            $scope.$on('setCurrentTimeToSlider', function (e, value) {
                 dragging = false;
                 slider.setValue(value);
-                
             })
         }],
         link: function (scope, element, attr, tableFilterCtrl) {
