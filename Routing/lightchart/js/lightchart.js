@@ -1,7 +1,7 @@
 ﻿main.directive('lightChart', function () {
     return {
         restrict: 'EA',
-        replace : true,
+        replace: true,
         scope: {
             title: '@',
             chartid: '@',
@@ -24,7 +24,7 @@
                 T: $scope.plotdata.length
             };
             var chartDrawInfo = {
-                fps:2   ,
+                fps: 2,
                 appendCount: 1024 //128,256,512,1024,2048 //slow - fast
             }
             var ctx = {};
@@ -38,7 +38,7 @@
             function initialize() {
                 $timeout(function () {
                     initializeCanvas();
-                    
+
                     //static
                     //drawChart();
                     //drawExecuteAllPlots();
@@ -94,7 +94,7 @@
                         y: chartSizeInfo.canvasSizeY - chartSizeInfo.axisXPadding - n.y,
                     })
                 });
-                return  convertedPoints;
+                return convertedPoints;
             }
             var calculatePlot = function () {
                 points = $scope.plotdata;
@@ -103,7 +103,7 @@
             }
             //#endregion
 
-            //#region draw chart 
+            //#region draw chart
             var handleTick = function () {
                 if (execute) {
                     drawExecute();
@@ -119,17 +119,17 @@
                 drawAppendPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, $scope.index, chartSizeInfo.T);
             }
 
-            function drawExecuteBySlider(newValue,oldValue) {
+            function drawExecuteBySlider(newValue, oldValue) {
                 $scope.index = oldValue;
                 drawAppendPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, oldValue, newValue);
             }
-            
+
             //#region draw append plots
             var drawAppendPlots = function (points, xMax, xMin, yMax, yMin, currentIndex, appendCount) {
                 //step forward or step back
                 $scope.index = reverse ? currentIndex - appendCount : currentIndex + appendCount
 
-                if ($scope.index >= 0 && $scope.index <= chartSizeInfo.T ) {
+                if ($scope.index >= 0 && $scope.index <= chartSizeInfo.T) {
                     drawAllPlots(points, xMax, xMin, yMax, yMin, currentIndex, appendCount);
                 }
                 else {
@@ -138,7 +138,7 @@
                 }
 
                 //if (!changeslider) {
-                    $rootScope.$broadcast('setCurrentTimeToSlider', $scope.index);
+                $rootScope.$broadcast('setCurrentTimeToSlider', $scope.index);
                 //}
             }
             //#endregion
@@ -151,10 +151,8 @@
                 //plot data
                 _.each(points, function (n, i) {
                     if (currentIndex <= i && i < currentIndex + appendCount) {
-                        for (var p = 0; p < px.length; p++)
-                        {
-                            if (reverse)
-                            {
+                        for (var p = 0; p < px.length; p++) {
+                            if (reverse) {
                                 clearImagePlot(stageImgData, ((n.x + px[p]) + (n.y + py[p]) * chartSizeInfo.canvasSizeX) * 4);
                             }
                             else {
@@ -191,7 +189,7 @@
             //#region timer event
             var execute = false;
             var reverse = false;
-            $scope.$on('start',function(e){
+            $scope.$on('start', function (e) {
                 execute = true;
             });
             $scope.$on('reset', function (e) {
@@ -251,8 +249,7 @@
             //#endregion
 
             //#region draw white canvas
-            var drawWhiteCanvas = function ()
-            {
+            var drawWhiteCanvas = function () {
                 //if (!stageImgData)
                 //{
                 //    //create white board
@@ -267,6 +264,5 @@
             }
             //#endregion
         }],
-
     };
 });
