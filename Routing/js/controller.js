@@ -1,27 +1,31 @@
-﻿var main = angular.module("app", ['ui.bootstrap-slider']);
+﻿var main = angular.module("app", [
+    'ui.bootstrap-slider',
+    'ui.router'
+]);
 
-main.controller('MyController', ['$scope', '$timeout', function ($scope, $timeout) {
+main.controller('MyController', ['$scope', '$state','$timeout', function ($scope,$state, $timeout) {
     $scope.initialize = function()
     {
         //initializeData(0, 0);
         initializeDataRandom(0, 0);
         $scope.length = $scope.dataPoints.length;
-        $scope.tabClicked('tab1');
+        $state.go('chart2');
+        //$scope.tabClicked('tab1');
     };
 
     $scope.tabClicked = function(type)
     {
-
-        if (type == 'tab1')
-        {
-            $scope.tab1 = true;
-            $scope.tab2 = false;
-        }
-        else if (type == 'tab2')
-        {
-            $scope.tab1 = false;
-            $scope.tab2 = true;
-        }
+        $state.go(type);
+        //if (type == 'tab1')
+        //{
+        //    $scope.tab1 = true;
+        //    $scope.tab2 = false;
+        //}
+        //else if (type == 'tab2')
+        //{
+        //    $scope.tab1 = false;
+        //    $scope.tab2 = true;
+        //}
         //Stop Animation on Canvas 
         //Because memory is used even if canvas is not displayed.
         $scope.$broadcast('stop');
