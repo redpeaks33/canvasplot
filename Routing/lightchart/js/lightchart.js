@@ -38,12 +38,12 @@
             initialize();
 
             function initialize() {
+                //$timeout -> Execute after html tag canvas is loaded.
                 $timeout(function () {
                     initializeCanvas();
 
                     //static
-                    //drawChart();
-                    //drawExecuteAllPlots();
+                    drawExecuteAllPlots();
 
                     //dynamic
                     createjs.Ticker.addEventListener("tick", handleTick);
@@ -54,9 +54,11 @@
 
             //#region initialize canvas
             function initializeCanvas(canvasID) {
+                //context for plot main data
                 $scope.stage = new createjs.Stage($scope.chartid);
                 ctx = $scope.stage.canvas.getContext('2d');
 
+                //context for axis for main data
                 $scope.stage_background = new createjs.Stage($scope.backgroundid);
                 ctx_back = $scope.stage_background.canvas.getContext('2d');
 
@@ -71,22 +73,18 @@
                 var convertedPoints = [];
                 var maxX = _.max(originalPoints, function (n) { return n.x; }).x;
                 var maxY = _.max(originalPoints, function (n) { return n.y; }).y;
-                //maxX = (maxX + 2) * 1000;
-                //maxY = (maxY + 2) * 1000;
                 _.each(originalPoints, function (n) {
-                    //n.x = (n.x + 2) * 1000;
-                    //n.y = (n.y + 2) * 1000;
                     convertedPoints.push({
                         t: n.t,
                         x: ~~(n.x * (chartSizeInfo.canvasSizeX - chartSizeInfo.axisYPadding) / maxX),
                         y: ~~(n.y * (chartSizeInfo.canvasSizeY - chartSizeInfo.axisXPadding) / maxY),
-                        //x: Math.floor((n.x * (chartSizeInfo.canvasSizeX - chartSizeInfo.axisYPadding) / maxX )),
-                        //y: Math.floor((n.y * (chartSizeInfo.canvasSizeY - chartSizeInfo.axisXPadding) / maxY )),
                     })
                 });
                 return convertedPoints;
             }
 
+            //canvas nominal (0,0) exists a most left and up point.
+            //transform nominal based on customized axis.
             function transformCoordination(originalPoints) {
                 var convertedPoints = [];
                 _.each(originalPoints, function (n) {
@@ -153,6 +151,7 @@
                 //plot data
                 _.each(points, function (n, i) {
                     if (currentIndex <= i && i < currentIndex + appendCount) {
+                        //plot + or clear + on canvas.
                         for (var p = 0; p < px.length; p++) {
                             if (reverse) {
                                 clearImagePlot(stageImgData, ((n.x + px[p]) + (n.y + py[p]) * chartSizeInfo.canvasSizeX) * 4);
@@ -171,6 +170,7 @@
                 $scope.$apply();
             }
 
+           
             function setImagePlot(image, index) {
                 image.data[index + 0] = 255;
                 image.data[index + 1] = 0;
@@ -227,25 +227,56 @@
 
             //#region draw axis
             function drawAxis() {
-                drawAxisX();
-                drawAxisY();
+                let g = new createjs.Graphics();
+
+                drawAxisX(g);
+                drawAxisY(g);
+
+                var s = new createjs.Shape(g);
+                s.draw(ctx_back);
             }
 
-            function drawAxisX() {
-                var g = new createjs.Graphics();
-                g.beginStroke("Black");
-                g.moveTo(0, chartSizeInfo.canvasSizeY - chartSizeInfo.axisXPadding);
-                g.lineTo(chartSizeInfo.canvasSizeX, chartSizeInfo.canvasSizeY - chartSizeInfo.axisXPadding);
-                var s = new createjs.Shape(g);
-                s.draw(ctx_back);
+            function drawAxisX(g) {
+                let xBase = chartSizeInfo.canvasSizeY - chartSizeInfo.axisXPadding;
+                let span = 60;
+                let axisCount = xBase / span;
+                let startX = 0;
+                for (let i = 0; i < axisCount; i++) {
+                    if (i == 0)
+                    {
+                        //base axis
+                        g.beginStroke("Black");
+                    }
+                    else {
+                        //sub axis
+                        g.beginStroke("Red");
+                        startX = chartSizeInfo.axisXPadding;
+                    }
+                    g.moveTo(startX, xBase - i * span);
+                    g.lineTo(chartSizeInfo.canvasSizeX, xBase - i * span);
+                }
             }
-            function drawAxisY() {
-                var g = new createjs.Graphics();
-                g.beginStroke("Black");
-                g.moveTo(chartSizeInfo.axisYPadding, 0);
-                g.lineTo(chartSizeInfo.axisYPadding, chartSizeInfo.canvasSizeY);
-                var s = new createjs.Shape(g);
-                s.draw(ctx_back);
+
+            function drawAxisY(g) {
+                let base = chartSizeInfo.axisYPadding;
+                let span = 60;
+                let axisCount = chartSizeInfo.canvasSizeX / span;
+                let endP = 0;
+                for (let i = 0; i < axisCount; i++) {
+                    if (i == 0)
+                    {
+                        //base axis
+                        g.beginStroke("Black");
+                        endP = chartSizeInfo.canvasSizeY;
+                    }
+                    else {
+                        //sub axis
+                        g.beginStroke("Blue");
+                        endP = chartSizeInfo.canvasSizeY - chartSizeInfo.axisXPadding;
+                    }
+                    g.moveTo(base + i * span, 0);
+                    g.lineTo(base + i * span, endP);
+                }
             }
             //#endregion
 
