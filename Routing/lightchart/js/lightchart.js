@@ -5,12 +5,15 @@
         scope: {
             title: '@',
             chartid: '@',
+            chartsubid: '@',
             backgroundid: '@',
+            backgroundsubid: '@',
             width: '=',
             height: '=',
             dx: '=',
             dy: '=',
-            plotdata: '='
+            plotdata: '=',
+            plotdatasub: '='
         },
         templateUrl: '/lightchart/html/lightchart.html',
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $rootScope, $timeout) {
@@ -31,6 +34,9 @@
             }
             var ctx = {};
             var ctx_back = {};
+            var ctx_sub = {};
+            var ctx_back_sub = {};
+
             var points = [];
             var stageImgData;
             $scope.index = 0;
@@ -65,6 +71,9 @@
                 drawWhiteCanvas();
                 drawAxis();
                 calculatePlot();
+
+                //Sub Contents
+                drawSubContents();
             }
             //#endregion
 
@@ -154,6 +163,7 @@
                     if (currentIndex <= i && i < currentIndex + appendCount) {
                         //plot + or clear + on canvas.
                         for (var p = 0; p < px.length; p++) {
+                            //do not draw if value is out of canvas size 
                             if ((n.x + px[p]) < chartSizeInfo.canvasSizeX)
                             {
                                 if (reverse) {
@@ -288,8 +298,29 @@
             //#region draw white canvas
             var drawWhiteCanvas = function () {
                 stageImgData = ctx.createImageData(chartSizeInfo.canvasSizeX, chartSizeInfo.canvasSizeY);
+                //stageImgData = ctx_sub.createImageData(chartSizeInfo.canvasSizeX, chartSizeInfo.canvasSizeY);
             }
             //#endregion
+
+            function drawSubContents() {
+                let g = new createjs.Graphics();
+
+                g.s("Blue").setStrokeDash([4,2], 0).setStrokeStyle(1); //color dot thickness
+                g.drawCircle(chartSizeInfo.canvasSizeX / 2, chartSizeInfo.canvasSizeY/2, 200);
+               
+
+                var s = new createjs.Shape(g);
+                s.draw(ctx_back);
+
+                /////////////////////////////////////////////
+                g = new createjs.Graphics();
+
+                g.s("Green").setStrokeDash([4, 2], 0).setStrokeStyle(1); //color dot thickness
+                g.drawCircle(chartSizeInfo.canvasSizeX / 2, chartSizeInfo.canvasSizeY/2 + 300, 200);
+
+                s = new createjs.Shape(g);
+                s.draw(ctx_back);
+            }
         }],
     };
 });
