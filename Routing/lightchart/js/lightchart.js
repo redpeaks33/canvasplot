@@ -145,7 +145,8 @@
 
             var px = [0, 0, 0, 0, 0, 1, 2, -1, -2];
             var py = [0, 1, 2, -1, -2, 0, 0, 0, 0];
-
+            //var px = [0, 0, 0, 0, 0, 1, 1,1, -1,-1,-1, 2,-2];
+            //var py = [0, 1, 2, -1, -2, 0,1,-1, 0,1,-1,0,0];
             //#region draw all plots
             function drawAllPlots(points, xMax, xMin, yMax, yMin, currentIndex, appendCount) {
                 //plot data
@@ -153,12 +154,16 @@
                     if (currentIndex <= i && i < currentIndex + appendCount) {
                         //plot + or clear + on canvas.
                         for (var p = 0; p < px.length; p++) {
-                            if (reverse) {
-                                clearImagePlot(stageImgData, ((n.x + px[p]) + (n.y + py[p]) * chartSizeInfo.canvasSizeX) * 4);
+                            if ((n.x + px[p]) < chartSizeInfo.canvasSizeX)
+                            {
+                                if (reverse) {
+                                    clearImagePlot(stageImgData, ((n.x + px[p]) + (n.y + py[p]) * chartSizeInfo.canvasSizeX) * 4);
+                                }
+                                else {
+                                    setImagePlot(stageImgData, ((n.x + px[p]) + (n.y + py[p]) * chartSizeInfo.canvasSizeX) * 4);
+                                }
                             }
-                            else {
-                                setImagePlot(stageImgData, ((n.x + px[p]) + (n.y + py[p]) * chartSizeInfo.canvasSizeX) * 4);
-                            }
+
                         }
                     }
                 });
@@ -245,15 +250,15 @@
                     if (i == 0)
                     {
                         //base axis
-                        g.beginStroke("Black");
+                        g.s("Gray").setStrokeDash([1, 0], 0).setStrokeStyle(2);
                     }
                     else {
                         //sub axis
-                        g.beginStroke("Red");
+                        g.s("Gray").setStrokeDash([4, 2], 0).setStrokeStyle(1); //color dot thickness
                         startX = chartSizeInfo.axisXPadding;
                     }
-                    g.moveTo(startX, xBase - i * span);
-                    g.lineTo(chartSizeInfo.canvasSizeX, xBase - i * span);
+                    g.mt(startX, xBase - i * span);
+                    g.lt(chartSizeInfo.canvasSizeX, xBase - i * span);
                 }
             }
 
@@ -266,16 +271,16 @@
                     if (i == 0)
                     {
                         //base axis
-                        g.beginStroke("Black");
+                        g.s("Gray").setStrokeDash([1, 0], 0).setStrokeStyle(2);
                         endP = chartSizeInfo.canvasSizeY;
                     }
                     else {
                         //sub axis
-                        g.beginStroke("Blue");
+                        g.s("Gray").setStrokeDash([4,2], 0).setStrokeStyle(1); //color dot thickness
                         endP = chartSizeInfo.canvasSizeY - chartSizeInfo.axisXPadding;
                     }
-                    g.moveTo(base + i * span, 0);
-                    g.lineTo(base + i * span, endP);
+                    g.mt(base + i * span, 0);
+                    g.lt(base + i * span, endP);
                 }
             }
             //#endregion
