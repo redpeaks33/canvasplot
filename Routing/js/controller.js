@@ -10,27 +10,17 @@ main.controller('MyController', ['$scope', '$state','$timeout', function ($scope
         initializeDataRandom(0, 0);
         $scope.length = $scope.dataPoints.length;
         $state.go('chart2');
-        //$scope.tabClicked('tab1');
     };
 
     $scope.tabClicked = function(type)
     {
         $state.go(type);
-        //if (type == 'tab1')
-        //{
-        //    $scope.tab1 = true;
-        //    $scope.tab2 = false;
-        //}
-        //else if (type == 'tab2')
-        //{
-        //    $scope.tab1 = false;
-        //    $scope.tab2 = true;
-        //}
+
         //Stop Animation on Canvas 
         //Because memory is used even if canvas is not displayed.
         $scope.$broadcast('stop');
-
         //Load CurrentTime
+        
        
     }
 

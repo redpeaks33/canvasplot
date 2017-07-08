@@ -8,6 +8,8 @@
             backgroundid: '@',
             width: '=',
             height: '=',
+            dx: '=',
+            dy: '=',
             plotdata: '='
         },
         templateUrl: '/lightchart/html/lightchart.html',
@@ -15,8 +17,8 @@
             var chartSizeInfo = {
                 canvasSizeX: $scope.width,
                 canvasSizeY: $scope.height,
-                axisXPadding: 40,
-                axisYPadding: 40,
+                axisXPadding: $scope.dx,
+                axisYPadding: $scope.dy,
                 xMax: $scope.width,
                 xMin: 0,
                 yMax: $scope.height,
@@ -221,7 +223,6 @@
             })
             //#endregion
             //#endregion
-
             //#endregion
 
             //#region draw axis
@@ -250,17 +251,7 @@
 
             //#region draw white canvas
             var drawWhiteCanvas = function () {
-                //if (!stageImgData)
-                //{
-                //    //create white board
-                //    for (var i = 0; i < stageImgData.data.length ; i++) {
-                //        stageImgData.data[i] = 255;
-                //    };
-                //    ctx.putImageData(stageImgData, 0, 0)
-                //}
-                //else {
                 stageImgData = ctx.createImageData(chartSizeInfo.canvasSizeX, chartSizeInfo.canvasSizeY);
-                //}
             }
             //#endregion
         }],
