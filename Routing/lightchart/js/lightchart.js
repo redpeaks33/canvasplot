@@ -92,7 +92,7 @@
                 return convertedPoints;
             }
 
-            //canvas nominal (0,0) exists a most left and up point.
+            //canvas nominal (0,0) exists a most upper-left point.
             //transform nominal based on customized axis.
             function transformCoordination(originalPoints) {
                 var convertedPoints = [];

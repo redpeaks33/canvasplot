@@ -27,6 +27,7 @@
     <script src="/custom/js/directive.js"></script>
     <script src="/lightchart/js/lightchart.js"></script>
     <script src="/lightchart/js/charttimer.js"></script>
+    <script src="/lightchart/js/inputfile.js"></script>
 
     <!-- slider -->
     <script src="/angular-bootstrap-slider-master/slider.js"></script>
@@ -35,6 +36,9 @@
     <!-- ui router -->
     <script src="/Scripts/angular-ui-router.min.js"></script>
     <script src="/js/router.js"></script>
+    <!-- file reader -->
+    <script src="/angular-file-input-master/dist/angular-file-input.js"></script>
+
 </head>
 <body>
     <div ng-controller="MyController" ng-init="initialize()">
@@ -42,6 +46,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <chart-Timer plotdata="dataPoints"></chart-Timer>
+                    <input-File></input-File>
                 </div>
                 <div class="col-lg-9">
                     <ul class="nav nav-tabs">

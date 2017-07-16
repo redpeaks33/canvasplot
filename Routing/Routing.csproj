@@ -70,6 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="angular-bootstrap-slider-master\slider.js" />
+    <Content Include="angular-file-input-master\dist\angular-file-input.js" />
+    <Content Include="angular-file-input-master\dist\angular-file-input.min.js" />
     <Content Include="bootstrap-slider-master\dist\bootstrap-slider.js" />
     <Content Include="bootstrap-slider-master\dist\bootstrap-slider.min.js" />
     <Content Include="bootstrap-slider-master\dist\css\bootstrap-slider.css" />
@@ -89,7 +91,9 @@
     <Content Include="index.html" />
     <Content Include="js\router.js" />
     <Content Include="lightchart\html\charttimer.html" />
+    <Content Include="lightchart\html\inputfile.html" />
     <Content Include="lightchart\js\charttimer.js" />
+    <Content Include="lightchart\js\inputfile.js" />
     <Content Include="memo.txt" />
     <Content Include="lightchart\html\lightchart.html" />
     <Content Include="lightchart\js\lightchart.js" />

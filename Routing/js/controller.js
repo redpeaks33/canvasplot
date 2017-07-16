@@ -1,6 +1,7 @@
 ﻿var main = angular.module("app", [
     'ui.bootstrap-slider',
-    'ui.router'
+    'ui.router',
+    'angularFileInput'
 ]);
 
 main.controller('MyController', ['$scope', '$state','$timeout', function ($scope,$state, $timeout) {
@@ -23,7 +24,7 @@ main.controller('MyController', ['$scope', '$state','$timeout', function ($scope
         
        
     }
-
+    $scope.file = {};
     //#region initialize data
 
     $scope.dataPoints = [];
