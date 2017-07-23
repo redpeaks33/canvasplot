@@ -69,62 +69,71 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="angular-bootstrap-slider-master\slider.js" />
-    <Content Include="angular-file-input-master\dist\angular-file-input.js" />
-    <Content Include="angular-file-input-master\dist\angular-file-input.min.js" />
-    <Content Include="bootstrap-slider-master\dist\bootstrap-slider.js" />
-    <Content Include="bootstrap-slider-master\dist\bootstrap-slider.min.js" />
-    <Content Include="bootstrap-slider-master\dist\css\bootstrap-slider.css" />
-    <Content Include="bootstrap-slider-master\dist\css\bootstrap-slider.min.css" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="css\charttimer.css" />
-    <Content Include="css\webglcanvas.css" />
-    <Content Include="css\canvas.css" />
-    <Content Include="css\chart.css" />
-    <Content Include="html\chart3D.html" />
-    <Content Include="html\chart8.html" />
-    <Content Include="html\chart4.html" />
-    <Content Include="html\chart2.html" />
+    <Content Include="custom\css\3DChart.css" />
+    <Content Include="custom\lightchart\js\geometry.js" />
+    <Content Include="custom\lightchart\js\threedController.js" />
+    <Content Include="download_lib\manual\angular-bootstrap-slider-master\slider.js" />
+    <Content Include="download_lib\manual\angular-file-input-master\dist\angular-file-input.js" />
+    <Content Include="download_lib\manual\angular-file-input-master\dist\angular-file-input.min.js" />
+    <Content Include="download_lib\manual\angular-threejs-master\dist\angular-threejs.js" />
+    <Content Include="download_lib\manual\angular-threejs-master\dist\angular-threejs.min.js" />
+    <Content Include="download_lib\manual\bootstrap-slider-master\dist\bootstrap-slider.js" />
+    <Content Include="download_lib\manual\bootstrap-slider-master\dist\bootstrap-slider.min.js" />
+    <Content Include="download_lib\manual\bootstrap-slider-master\dist\css\bootstrap-slider.css" />
+    <Content Include="download_lib\manual\bootstrap-slider-master\dist\css\bootstrap-slider.min.css" />
+    <Content Include="download_lib\manual\three.js-master\build\three.js" />
+    <Content Include="download_lib\manual\three.js-master\build\three.min.js" />
+    <Content Include="download_lib\manual\three.js-master\build\three.module.js" />
+    <Content Include="download_lib\nuget_packages\Content\bootstrap-theme.css" />
+    <Content Include="download_lib\nuget_packages\Content\bootstrap-theme.min.css" />
+    <Content Include="download_lib\nuget_packages\Content\bootstrap.css" />
+    <Content Include="download_lib\nuget_packages\Content\bootstrap.min.css" />
+    <Content Include="custom\css\charttimer.css" />
+    <Content Include="custom\css\webglcanvas.css" />
+    <Content Include="custom\css\canvas.css" />
+    <Content Include="custom\css\chart.css" />
+    <Content Include="custom\html\chart3D.html" />
+    <Content Include="custom\html\chart8.html" />
+    <Content Include="custom\html\chart4.html" />
+    <Content Include="custom\html\chart2.html" />
+    <Content Include="index3D.html" />
     <Content Include="index.html" />
-    <Content Include="js\router.js" />
-    <Content Include="lightchart\html\charttimer.html" />
-    <Content Include="lightchart\html\inputfile.html" />
-    <Content Include="lightchart\js\charttimer.js" />
-    <Content Include="lightchart\js\inputfile.js" />
+    <Content Include="custom\js\router.js" />
+    <Content Include="custom\lightchart\html\charttimer.html" />
+    <Content Include="custom\lightchart\html\inputfile.html" />
+    <Content Include="custom\lightchart\js\charttimer.js" />
+    <Content Include="custom\lightchart\js\inputfile.js" />
     <Content Include="memo.txt" />
-    <Content Include="lightchart\html\lightchart.html" />
-    <Content Include="lightchart\js\lightchart.js" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="js\controller.js" />
-    <Content Include="scripts\angular-mocks.js" />
-    <None Include="scripts\angular.intellisense.js" />
-    <Content Include="scripts\angular-ui-router.js" />
-    <Content Include="scripts\angular-ui-router.min.js" />
-    <Content Include="scripts\angular.js" />
-    <Content Include="scripts\angular.min.js" />
-    <Content Include="scripts\underscore.js" />
-    <Content Include="scripts\underscore.min.js" />
-    <Content Include="scripts\angular.min.js.map" />
-    <None Include="scripts\_references.js" />
+    <Content Include="custom\lightchart\html\lightchart.html" />
+    <Content Include="custom\lightchart\js\lightchart.js" />
+    <Content Include="download_lib\nuget_packages\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="custom\js\controller.js" />
+    <Content Include="download_lib\nuget_packages\scripts\angular-mocks.js" />
+    <None Include="download_lib\nuget_packages\scripts\angular.intellisense.js" />
+    <Content Include="download_lib\nuget_packages\scripts\angular-ui-router.js" />
+    <Content Include="download_lib\nuget_packages\scripts\angular-ui-router.min.js" />
+    <Content Include="download_lib\nuget_packages\scripts\angular.js" />
+    <Content Include="download_lib\nuget_packages\scripts\angular.min.js" />
+    <Content Include="download_lib\nuget_packages\scripts\underscore.js" />
+    <Content Include="download_lib\nuget_packages\scripts\underscore.min.js" />
+    <Content Include="download_lib\nuget_packages\scripts\angular.min.js.map" />
+    <None Include="download_lib\nuget_packages\scripts\_references.js" />
     <Content Include="packages.config" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="scripts\bootstrap.js" />
-    <Content Include="scripts\bootstrap.min.js" />
-    <Content Include="scripts\jquery-1.9.1.js" />
-    <Content Include="scripts\jquery-1.9.1.min.js" />
-    <Content Include="scripts\jquery-1.9.1.min.map" />
-    <Content Include="scripts\underscore.min.map" />
+    <Content Include="download_lib\nuget_packages\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="download_lib\nuget_packages\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="download_lib\nuget_packages\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="download_lib\nuget_packages\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="download_lib\nuget_packages\Content\bootstrap.min.css.map" />
+    <Content Include="download_lib\nuget_packages\Content\bootstrap.css.map" />
+    <Content Include="download_lib\nuget_packages\Content\bootstrap-theme.min.css.map" />
+    <Content Include="download_lib\nuget_packages\Content\bootstrap-theme.css.map" />
+    <None Include="download_lib\nuget_packages\scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="download_lib\nuget_packages\scripts\bootstrap.js" />
+    <Content Include="download_lib\nuget_packages\scripts\bootstrap.min.js" />
+    <Content Include="download_lib\nuget_packages\scripts\jquery-1.9.1.js" />
+    <Content Include="download_lib\nuget_packages\scripts\jquery-1.9.1.min.js" />
+    <Content Include="download_lib\nuget_packages\scripts\jquery-1.9.1.min.map" />
+    <Content Include="download_lib\nuget_packages\scripts\underscore.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -143,13 +152,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WebAPIController\WebAPIController.csproj">
-      <Project>{230e28ef-c45a-45d9-b082-49593ec64ce5}</Project>
-      <Name>WebAPIController</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="lightchart\css\" />
+    <Folder Include="custom\lightchart\css\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

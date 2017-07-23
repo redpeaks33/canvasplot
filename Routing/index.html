@@ -3,12 +3,12 @@
 
 <head>
     <title></title>
-    <script src="/scripts/angular.min.js"></script>
-    <script src="/scripts/jquery-1.9.1.min.js"></script>
-    <script src="/scripts/bootstrap.min.js"></script>
-    <script src="/scripts/underscore.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="Content/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="Content/bootstrap-theme.min.css">
+    <script src="/download_lib/nuget_packages/scripts/angular.min.js"></script>
+    <script src="/download_lib/nuget_packages/scripts/jquery-1.9.1.min.js"></script>
+    <script src="/download_lib/nuget_packages/scripts/bootstrap.min.js"></script>
+    <script src="/download_lib/nuget_packages/scripts/underscore.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/download_lib/nuget_packages/Content/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/download_lib/nuget_packages/Content/bootstrap-theme.min.css">
     <title></title>
 
     <!--CanvasJS-->
@@ -20,25 +20,33 @@
 
     <!--create js-->
     <script src="https://code.createjs.com/createjs-2015.05.21.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/chart.css">
-    <link rel="stylesheet" type="text/css" href="/css/canvas.css" />
-    <link rel="stylesheet" type="text/css" href="/css/charttimer.css" />
-    <script src="/js/controller.js"></script>
-    <script src="/custom/js/directive.js"></script>
-    <script src="/lightchart/js/lightchart.js"></script>
-    <script src="/lightchart/js/charttimer.js"></script>
-    <script src="/lightchart/js/inputfile.js"></script>
 
     <!-- slider -->
-    <script src="/angular-bootstrap-slider-master/slider.js"></script>
-    <link rel="stylesheet" type="text/css" href="/bootstrap-slider-master/dist/css/bootstrap-slider.min.css"/>
-    <script src="/bootstrap-slider-master/dist/bootstrap-slider.min.js"></script>
-    <!-- ui router -->
-    <script src="/Scripts/angular-ui-router.min.js"></script>
-    <script src="/js/router.js"></script>
-    <!-- file reader -->
-    <script src="/angular-file-input-master/dist/angular-file-input.js"></script>
+    <script src="/download_lib/manual/angular-bootstrap-slider-master/slider.js"></script>
+    <script src="/download_lib/manual/bootstrap-slider-master/dist/bootstrap-slider.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/download_lib/manual/bootstrap-slider-master/dist/css/bootstrap-slider.min.css"/>
 
+    <!-- ui router -->
+    <script src="/download_lib/nuget_packages/scripts/angular-ui-router.min.js"></script>
+
+    <!-- file reader -->
+    <script src="/download_lib/manual/angular-file-input-master/dist/angular-file-input.min.js"></script>
+
+    <!-- 3D -->
+    <script src="/download_lib/manual/three.js-master/build/three.min.js"></script>
+    <script src="/download_lib/manual/angular-threejs-master/dist/angular-threejs.min.js"></script>
+
+    <!-- custom -->
+    <script src="/custom/js/controller.js"></script>
+    <script src="/custom/js/router.js"></script>
+    <script src="/custom/lightchart/js/geometry.js"></script>
+    <script src="/custom/lightchart/js/lightchart.js"></script>
+    <script src="/custom/lightchart/js/charttimer.js"></script>
+    <script src="/custom/lightchart/js/inputfile.js"></script>
+    <link rel="stylesheet" type="text/css" href="/custom/css/chart.css">
+    <link rel="stylesheet" type="text/css" href="/custom/css/canvas.css" />
+    <link rel="stylesheet" type="text/css" href="/custom/css/charttimer.css" />
+    <link rel="stylesheet" type="text/css" href="/custom/css/3DChart.css" />
 </head>
 <body>
     <div ng-controller="MyController" ng-init="initialize()">
