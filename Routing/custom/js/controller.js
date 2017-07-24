@@ -8,11 +8,11 @@
 main.controller('MyController', ['$scope', '$state','$timeout', function ($scope,$state, $timeout) {
     $scope.initialize = function()
     {
-        //initializeData(0, 0);
-        initializeDataRandom(0, 0);
+        initializeData(0, 0);
+        //initializeDataRandom(0, 0);
         $scope.length = $scope.dataPoints.length;
-        //$state.go('chart2');
-        $state.go('chart3D');
+        $state.go('chart2');
+        //$state.go('chart3D');
 
     };
 

@@ -181,11 +181,18 @@
                                 else {
                                     setImagePlot(stageImgData, ((n.x + px[p]) + (n.y + py[p]) * chartSizeInfo.canvasSizeX) * 4);
                                 }
+
                             }
 
                         }
+
                     }
+
                 });
+
+                //Animation
+                circleShape.x = circleShape.x + 1;
+                $scope.stage_sub.update();
 
                 ctx.putImageData(stageImgData, 0, 0)
 
@@ -314,7 +321,8 @@
                 stageImgData = ctx.createImageData(chartSizeInfo.canvasSizeX, chartSizeInfo.canvasSizeY);
             }
             //#endregion
-
+            var circleShape;
+            var rectangleShape;
             function drawSubContents() {
                 let g = new createjs.Graphics();
 
@@ -328,12 +336,26 @@
                 /////////////////////////////////////////////
                 g = new createjs.Graphics();
 
-                g.s("Yellow").setStrokeDash([8, 4], 0).setStrokeStyle(1); //color dot thickness
+                g.s("Green").setStrokeDash([8, 4], 0).setStrokeStyle(1); //color dot thickness
                 g.drawCircle(chartSizeInfo.canvasSizeX / 2, chartSizeInfo.canvasSizeY / 2 + 300, 200);
-                g.beginFill("DarkRed").drawCircle(40, 40,30);
+                g.beginFill("Pink").drawCircle(40, 40,30);
 
-                s = new createjs.Shape(g);
-                s.draw(ctx_sub);
+                circleShape = new createjs.Shape(g);
+                $scope.stage_sub.addChild(circleShape);
+
+                g = new createjs.Graphics();
+                ////////////////////////////////////////////////////////////////////////////////
+                g.s("Red").setStrokeDash([8, 4], 0).setStrokeStyle(1); //color dot thickness
+                g.beginFill("Yellow").drawRect(0, 0, 120, 120);
+                g.beginFill("blue").drawRect(10, 10, 100, 100);
+
+                diamondShape = new createjs.Shape(g);
+                diamondShape.regX = diamondShape.regY = 60;
+                diamondShape.rotation = 45;
+                diamondShape.x = 100;
+                diamondShape.y = 100;
+                $scope.stage_sub.addChild(diamondShape);
+
             }
         }],
     };
