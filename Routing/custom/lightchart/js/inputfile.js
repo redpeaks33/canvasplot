@@ -10,6 +10,11 @@
             $scope.callback = function (file) {
                 $scope.file = file;
             }
+
+            $scope.callback_Image = function (file) {
+                $scope.image_file = file;
+                $rootScope.$broadcast('setImage',$scope.image_file );
+            }
         }],
         link: function (scope, element, attr, tableFilterCtrl) {
         },

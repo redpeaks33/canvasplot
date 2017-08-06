@@ -5,6 +5,7 @@
 /// <reference path="../../../custom/lightchart/js/geometry.js" />
 /// <reference path="../../../custom/lightchart/js/inputfile.js" />
 /// <reference path="../../../custom/lightchart/js/lightchart.js" />
+/// <reference path="../../../custom/lightchart/js/lightimage.js" />
 /// <reference path="../../../custom/lightchart/js/threedcontroller.js" />
 /// <reference path="../../manual/angular-bootstrap-slider-master/slider.js" />
 /// <reference path="../../manual/angular-file-input-master/dist/angular-file-input.js" />
