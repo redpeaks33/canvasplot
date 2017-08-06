@@ -28,7 +28,7 @@
                 $rootScope.$broadcast('stepback');
             }
             //#endregion
-
+  
 
             var slider = new Slider('#ex1', {
                 formatter: function (value) {
@@ -38,22 +38,24 @@
 
             var dragging = false;
             var value = { newValue: 0, oldValue: 0 }
+
             slider.on("slide", function (e) {
-                value.oldValue = e;
+                //value.oldValue = e;
             });
             slider.on("slideStart", function (e) {
-                dragging = true;
-                value.oldValue = e;
+                //dragging = true;
+                //value.oldValue = e;
             });
             slider.on("slideStop", function (e) {
-                value.newValue = e;
-                if (dragging) {
-                    $rootScope.$broadcast('setCurrentTimeToGraph', e.newValue, e.oldValue);
-                }
-                dragging = false;
+                //value.newValue = e;
+                //if (dragging) {
+                //    $rootScope.$broadcast('setCurrentTimeToGraph', e.newValue, e.oldValue);
+                //}
+                //dragging = false;
             });
             slider.on("change", function (e) {
-                $rootScope.$broadcast('setCurrentTimeToGraph', e.newValue, e.oldValue);
+                //$rootScope.$broadcast('setCurrentTimeToGraph', e.newValue, e.oldValue);
+                $rootScope.$broadcast('setCurrentTimeToGraph', e.newValue, 0);
             });
 
             $scope.$on('setCurrentTimeToSlider', function (e, value) {

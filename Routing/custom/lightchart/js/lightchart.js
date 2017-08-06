@@ -49,7 +49,7 @@
                     initializeCanvas();
 
                     //static
-                    drawExecuteAllPlots();
+                    //drawExecuteAllPlots();
 
                     //dynamic
                     createjs.Ticker.addEventListener("tick", handleTick);
@@ -138,6 +138,7 @@
             }
 
             function drawExecuteBySlider(newValue, oldValue) {
+                drawWhiteCanvas();
                 $scope.index = oldValue;
                 drawAppendPlots(points, chartSizeInfo.xMax, chartSizeInfo.xMin, chartSizeInfo.yMax, chartSizeInfo.yMin, oldValue, newValue);
             }
