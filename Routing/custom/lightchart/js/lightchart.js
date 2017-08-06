@@ -69,7 +69,6 @@
                 ctx_back = $scope.stage_background.canvas.getContext('2d');
 
                 //context for plot main data
-
                 $scope.stage_sub = new createjs.Stage($scope.chartsubid);
                 ctx_sub = $scope.stage_sub.canvas.getContext('2d');
 
@@ -89,27 +88,38 @@
             //#endregion
             var setZoomEvent = function(stage)
             {
-                //stage.enableDOMEvents(true);
-                //stage.on("click", function (evt) {
+                stage.enableDOMEvents(true);
+                //OK
+                //stage.addEventListener("mouseenter", function (evt) {
                 //    alert("the canvas was clicked at " + evt.stageX + "," + evt.stageY);
                 //})
-                //stage.on("stagemousedown", function (event) {
-                //    alert("the canvas was clicked at " + evt.stageX + "," + evt.stageY);
+                //stage.addEventListener("mouseleave", function (evt) {
+                //    alert("the canvas was down at " + evt.stageX + "," + evt.stageY);
                 //})
-                //stage.canvas.addEventListener("pressmove", function (evt) {
-                //    alert("the canvas was clicked at " + evt.stageX + "," + evt.stageY);
-                //})
-                //stage.canvas.addEventListener("stagemousedown", function (e) {
-                //    var offset = { x: stage.x - e.stageX, y: stage.y - e.stageY };
-                //    stage.addEventListener("stagemousemove", function (ev) {
-                //        stage.x = ev.stageX + offset.x;
-                //        stage.y = ev.stageY + offset.y;
-                //        stage.update();
-                //    });
-                //    stage.addEventListener("stagemouseup", function () {
-                //        stage.removeAllEventListeners("stagemousemove");
-                //    });
-                //});
+                // タッチ操作をサポートしているブラウザーならば
+               // if (createjs.Touch.isSupported() == true) {
+                    // タッチ操作を有効にします。
+                    createjs.Touch.enable(stage)
+                //}
+                stage.enableMouseOver(20);
+                stage.addEventListener("stagemouseover", function (evt) {
+                    alert("the canvas was down at " + evt.stageX + "," + evt.stageY);
+                })
+                stage.addEventListener("pressmove", function (evt) {
+                    alert("the canvas was clicked at " + evt.stageX + "," + evt.stageY);
+                })
+                stage.addEventListener("stagemousedown", function (e) {
+                    var offset = { x: stage.x - e.stageX, y: stage.y - e.stageY };
+                    stage.addEventListener("stagemousemove", function (ev) {
+                        stage.x = ev.stageX + offset.x;
+                        stage.y = ev.stageY + offset.y;
+                        stage.update();
+                    });
+                    stage.addEventListener("stagemouseup", function () {
+                        stage.removeAllEventListeners("stagemousemove");
+                    });
+                });
+                stage.update();
             }
             //#region transform coordination
             function convertScaleValue(originalPoints) {
