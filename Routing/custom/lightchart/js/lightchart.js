@@ -77,6 +77,8 @@
                 $scope.stage_sub_background = new createjs.Stage($scope.backgroundsubid);
                 ctx_back_sub = $scope.stage_sub_background.canvas.getContext('2d');
 
+                setZoomEvent($scope.stage);
+                setZoomEvent($scope.stage_background);
                 drawWhiteCanvas();
                 drawAxis();
                 calculatePlot();
@@ -85,7 +87,30 @@
                 drawSubContents();
             }
             //#endregion
-
+            var setZoomEvent = function(stage)
+            {
+                //stage.enableDOMEvents(true);
+                //stage.on("click", function (evt) {
+                //    alert("the canvas was clicked at " + evt.stageX + "," + evt.stageY);
+                //})
+                //stage.on("stagemousedown", function (event) {
+                //    alert("the canvas was clicked at " + evt.stageX + "," + evt.stageY);
+                //})
+                //stage.canvas.addEventListener("pressmove", function (evt) {
+                //    alert("the canvas was clicked at " + evt.stageX + "," + evt.stageY);
+                //})
+                //stage.canvas.addEventListener("stagemousedown", function (e) {
+                //    var offset = { x: stage.x - e.stageX, y: stage.y - e.stageY };
+                //    stage.addEventListener("stagemousemove", function (ev) {
+                //        stage.x = ev.stageX + offset.x;
+                //        stage.y = ev.stageY + offset.y;
+                //        stage.update();
+                //    });
+                //    stage.addEventListener("stagemouseup", function () {
+                //        stage.removeAllEventListeners("stagemousemove");
+                //    });
+                //});
+            }
             //#region transform coordination
             function convertScaleValue(originalPoints) {
                 var convertedPoints = [];
