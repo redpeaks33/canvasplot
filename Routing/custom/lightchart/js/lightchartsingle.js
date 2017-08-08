@@ -1,4 +1,4 @@
-﻿main.directive('lightChart', function () {
+﻿main.directive('lightChartSingle', function () {
     return {
         restrict: 'EA',
         replace: true,
@@ -15,7 +15,7 @@
             plotdata: '=',
             plotdatasub: '='
         },
-        templateUrl: '/custom/lightchart/html/lightchart.html',
+        templateUrl: '/custom/lightchart/html/lightchartsingle.html',
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $rootScope, $timeout) {
             var chartSizeInfo = {
                 canvasSizeX: $scope.width,
@@ -64,84 +64,51 @@
                 $scope.stage = new createjs.Stage($scope.chartid);
                 ctx = $scope.stage.canvas.getContext('2d');
 
-                //context for axis for main data
-                $scope.stage_background = new createjs.Stage($scope.backgroundid);
-                ctx_back = $scope.stage_background.canvas.getContext('2d');
-
-                ////context for plot main data
-                //$scope.stage_sub = new createjs.Stage($scope.chartsubid);
-                //ctx_sub = $scope.stage_sub.canvas.getContext('2d');
-
-                ////context for axis for main data
-                //$scope.stage_sub_background = new createjs.Stage($scope.backgroundsubid);
-                //ctx_back_sub = $scope.stage_sub_background.canvas.getContext('2d');
-
-
-                var canvas = document.getElementById($scope.chartid);
-                canvas.addEventListener("mousewheel", MouseWheelHandler, false);
-                canvas.addEventListener("DOMMouseScroll", MouseWheelHandler, false);
-
-                //stage2.nextStage = stage1;
-                $scope.stage_background.nextStage = $scope.stage;
-                //setZoomEvent($scope.stage);
-                //setZoomEvent($scope.stage_background);
-                //$scope.stage.nextStage = $scope.stage_background;
-                //$scope.stage_backgroundnextStage = $scope.stage;
-
+                setZoomEvent($scope.stage);
 
                 drawWhiteCanvas();
-                drawAxis();
+                //drawAxis();
                 calculatePlot();
 
                 //Sub Contents
-                drawContents();
                 //drawSubContents();
             }
             //#endregion
-            function MouseWheelHandler(e) {
-                let stage = $scope.stage;
-                if (Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail))) > 0)
-                    zoom = 1.1;
-                else
-                    zoom = 1 / 1.1;
-                var local = stage.globalToLocal(stage.mouseX, stage.mouseY);
-                stage.regX = local.x;
-                stage.regY = local.y;
-                stage.x = stage.mouseX;
-                stage.y = stage.mouseY;
-                stage.scaleX = stage.scaleY *= zoom;
-
-                stage.update();
-
-            }
-
             var setZoomEvent = function(stage)
             {
                 stage.enableDOMEvents(true);
-                    stage.addEventListener("stagemousedown", function (e) {
-                        var offset = { x: stage.x - e.stageX, y: stage.y - e.stageY };
-                        stage.addEventListener("stagemousemove", function (ev) {
-                            stage.x = ev.stageX + offset.x;
-                            stage.y = ev.stageY + offset.y;
-                            stage.update();
-                        });
-                        stage.addEventListener("stagemouseup", function () {
-                            stage.removeAllEventListeners("stagemousemove");
-                        });
+                //OK
+                stage.addEventListener("mouseenter", function (evt) {
+                    //alert('enter');
+                })
+                stage.addEventListener("mouseleave", function (evt) {
+                    //alert('leave');
+                })
+                // タッチ操作をサポートしているブラウザーならば
+               // if (createjs.Touch.isSupported() == true) {
+                    // タッチ操作を有効にします。
+                    createjs.Touch.enable(stage)
+                //}
+                stage.enableMouseOver(20);
+                stage.addEventListener("stagemouseover", function (evt) {
+                    alert("the canvas was down at " + evt.stageX + "," + evt.stageY);
+                })
+                stage.addEventListener("pressmove", function (evt) {
+                    alert("the canvas was clicked at " + evt.stageX + "," + evt.stageY);
+                })
+                stage.addEventListener("stagemousedown", function (e) {
+                    
+                    var offset = { x: stage.x - e.stageX, y: stage.y - e.stageY };
+                    stage.addEventListener("stagemousemove", function (ev) {
+                        stage.x = ev.stageX + offset.x;
+                        stage.y = ev.stageY + offset.y;
+                        stage.update();
                     });
-
-                //stage.enableDOMEvents(true);
-                //    stage.addEventListener("stagemousedown", function (e) {
-                //        var offset = { x: stage.x - e.stageX, y: stage.y - e.stageY };
-                //        stage.addEventListener("stagemousemove", function (ev) {
-                //            stage.x = ev.stageX + offset.x;
-                //            stage.y = ev.stageY + offset.y;
-                //            stage.update();
-                //        });
-                //        stage.addEventListener("stagemouseup", function () {
-                //            stage.removeAllEventListeners("stagemousemove");
-                //        });
-                //    });
+                    stage.addEventListener("stagemouseup", function () {
+                        stage.removeAllEventListeners("stagemousemove");
+                    });
+                });
+                stage.update();
             }
             //#region transform coordination
             function convertScaleValue(originalPoints) {
@@ -249,8 +216,8 @@
                 });
 
                 //Animation
-                //circleShape.x = circleShape.x + 1;
-                //$scope.stage_sub.update();
+                circleShape.x = circleShape.x + 1;
+                $scope.stage_sub.update();
 
                 ctx.putImageData(stageImgData, 0, 0)
 
@@ -381,33 +348,6 @@
             //#endregion
             var circleShape;
             var rectangleShape;
-        
-            function drawContents() {
-                /////////////////////////////////////////////
-                g = new createjs.Graphics();
-
-                g.s("Green").setStrokeDash([8, 4], 0).setStrokeStyle(1); //color dot thickness
-                g.drawCircle(chartSizeInfo.canvasSizeX / 2, chartSizeInfo.canvasSizeY / 2 + 300, 200);
-                g.beginFill("Pink").drawCircle(40, 40, 30);
-
-                circleShape = new createjs.Shape(g);
-                $scope.stage.addChild(circleShape);
-
-                g = new createjs.Graphics();
-                ////////////////////////////////////////////////////////////////////////////////
-                g.s("Red").setStrokeDash([8, 4], 0).setStrokeStyle(1); //color dot thickness
-                g.beginFill("Yellow").drawRect(0, 0, 120, 120);
-                g.beginFill("blue").drawRect(10, 10, 100, 100);
-
-                diamondShape = new createjs.Shape(g);
-                diamondShape.regX = diamondShape.regY = 60;
-                diamondShape.rotation = 45;
-                diamondShape.x = 100;
-                diamondShape.y = 100;
-                $scope.stage.addChild(diamondShape);
-                $scope.stage.update();
-            }
-
             function drawSubContents() {
                 let g = new createjs.Graphics();
 
@@ -440,7 +380,7 @@
                 diamondShape.x = 100;
                 diamondShape.y = 100;
                 $scope.stage_sub.addChild(diamondShape);
-                
+
             }
         }],
     };

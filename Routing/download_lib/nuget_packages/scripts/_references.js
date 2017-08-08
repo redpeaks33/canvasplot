@@ -4,6 +4,7 @@
 /// <reference path="../../../custom/lightchart/js/charttimer.js" />
 /// <reference path="../../../custom/lightchart/js/inputfile.js" />
 /// <reference path="../../../custom/lightchart/js/lightchart.js" />
+/// <reference path="../../../custom/lightchart/js/lightchartsingle.js" />
 /// <reference path="../../../custom/lightchart/js/lightimage.js" />
 /// <reference path="../../../custom/lightchart/js/lightthreed.js" />
 /// <reference path="../../../custom/lightchart/js/threedcontroller.js" />
