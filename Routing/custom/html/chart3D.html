@@ -3,12 +3,16 @@
         <div class="row">
             <div class="col-lg-12">
                 3D
-                <light-Threed>
-                    <div class="light-3dmodel-container"></div>
-                    {{point.x}}:{{point.y}}
-                    <br/>
-                    {{mousepoint.x}}:{{mousepoint.y}}
-                </light-Threed>
+                <div class="light-3dmodel-container">
+                    <light-Threed>
+                        Click Position on Window : {{point.x}}:{{point.y}}
+                        <br />
+                        Click Position on Container :{{mousepoint.x}}:{{mousepoint.y}}
+                        <br />
+                        X:{{ThreeD.X}}, Y:{{ThreeD.Y}}, Z:{{ThreeD.Z}}
+                        <div/>
+                    </light-Threed>
+                </div>
             </div>
         </div>
     </div>
