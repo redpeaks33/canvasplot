@@ -78,6 +78,8 @@
     <Content Include="custom\lightchart\js\lightthreed.js" />
     <Content Include="custom\lightchart\js\lightimage.js" />
     <Content Include="custom\lightchart\js\threedController.js" />
+    <Content Include="custom\lightchart\js\units\UnitDrawService.js" />
+    <Content Include="custom\resource\bear.png" />
     <Content Include="download_lib\manual\angular-bootstrap-slider-master\slider.js" />
     <Content Include="download_lib\manual\angular-bootstrap-slider-master\test.js" />
     <Content Include="download_lib\manual\angular-file-input-master\dist\angular-file-input.js" />

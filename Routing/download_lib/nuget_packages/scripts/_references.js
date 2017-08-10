@@ -8,6 +8,7 @@
 /// <reference path="../../../custom/lightchart/js/lightimage.js" />
 /// <reference path="../../../custom/lightchart/js/lightthreed.js" />
 /// <reference path="../../../custom/lightchart/js/threedcontroller.js" />
+/// <reference path="../../../custom/lightchart/js/units/unitdrawservice.js" />
 /// <reference path="../../manual/angular-bootstrap-slider-master/slider.js" />
 /// <reference path="../../manual/angular-bootstrap-slider-master/test.js" />
 /// <reference path="../../manual/angular-file-input-master/dist/angular-file-input.js" />
